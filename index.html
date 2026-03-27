@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Évaluateur de Maturité Digitale — Ivory Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #111E35;
+    --navy-light: #1A2D4A;
+    --gold: #C9A227;
+    --gold-light: #E8C44A;
+    --teal: #1D9E75;
+    --teal-light: #5DCAA5;
+    --blue: #185FA5;
+    --blue-light: #378ADD;
+    --amber: #BA7517;
+    --red: #E24B4A;
+    --text-primary: #F0F4FF;
+    --text-secondary: #7A8BAA;
+    --text-muted: #4A5A72;
+    --border: rgba(255,255,255,0.08);
+    --border-mid: rgba(255,255,255,0.14);
+    --surface: rgba(255,255,255,0.04);
+    --surface-mid: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  /* HEADER */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .logo-group { display: flex; align-items: center; gap: 10px; }
+  .logo-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px; color: var(--navy); font-weight: 400;
+  }
+  .logo-name { font-size: 14px; font-weight: 500; color: var(--gold); }
+  .logo-tagline { font-size: 11px; color: var(--text-muted); }
+  .header-badge {
+    font-size: 11px; background: rgba(201,162,39,0.12);
+    color: var(--gold); border: 0.5px solid rgba(201,162,39,0.3);
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* INTRO */
+  .intro { text-align: center; margin-bottom: 2rem; }
+  .intro-eyebrow {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--teal-light); font-weight: 500; margin-bottom: 12px;
+  }
+  .intro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; line-height: 1.2; color: var(--text-primary);
+    margin-bottom: 10px;
+  }
+  .intro-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+  .intro-pills { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .intro-pill {
+    font-size: 11px; padding: 4px 12px; border-radius: 20px;
+    background: var(--surface); border: 0.5px solid var(--border-mid);
+    color: var(--text-secondary);
+  }
+
+  /* PROGRESS */
+  .progress-wrap { margin-bottom: 1.5rem; }
+  .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .progress-axis { font-size: 12px; color: var(--text-secondary); }
+  .progress-count { font-size: 12px; font-weight: 500; color: var(--gold); }
+  .progress-track {
+    height: 3px; background: var(--surface-mid);
+    border-radius: 2px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--gold);
+    border-radius: 2px; transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: var(--navy-mid);
+    border: 0.5px solid var(--border-mid);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    animation: fadeSlide 0.3s ease;
+  }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .q-axis-row {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 12px;
+  }
+  .q-axis-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .q-axis-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--text-muted);
+  }
+  .q-text {
+    font-size: 16px; font-weight: 500; color: var(--text-primary);
+    line-height: 1.45; margin-bottom: 1.25rem;
+  }
+  .q-options { display: flex; flex-direction: column; gap: 8px; }
+  .q-option {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 14px;
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    background: var(--surface);
+  }
+  .q-option:hover {
+    border-color: var(--border-mid);
+    background: var(--surface-mid);
+  }
+  .q-option.selected {
+    border-color: var(--blue-light);
+    background: rgba(55,138,221,0.1);
+  }
+  .q-radio {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s ease;
+  }
+  .q-option.selected .q-radio {
+    border-color: var(--blue-light);
+    background: var(--blue-light);
+  }
+  .q-radio-inner {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: white; display: none;
+  }
+  .q-option.selected .q-radio-inner { display: block; }
+  .q-option-body { flex: 1; }
+  .q-option-label { font-size: 13px; color: var(--text-primary); line-height: 1.4; }
+  .q-option-detail { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.3; }
+
+  /* NAV BUTTONS */
+  .nav-row { display: flex; gap: 10px; }
+  .btn {
+    flex: 1; padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    border-radius: 10px; cursor: pointer;
+    border: 0.5px solid var(--border-mid);
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: all 0.18s ease;
+  }
+  .btn:hover:not(:disabled) { background: var(--surface-mid); border-color: rgba(255,255,255,0.2); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn.primary {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+  }
+  .btn.primary:hover:not(:disabled) { background: #0C447C; border-color: #0C447C; }
+  .btn.primary:disabled { opacity: 0.4; }
+
+  /* RESULTS */
+  #result-section { display: none; animation: fadeSlide 0.4s ease; }
+
+  .result-hero {
+    background: var(--navy-mid);
+    border: 0.5px solid var(--border-mid);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .score-ring {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    flex-direction: column;
+  }
+  .score-num { font-size: 32px; font-weight: 600; color: var(--text-primary); line-height: 1; }
+  .score-pct { font-size: 12px; color: var(--text-muted); }
+  .result-level {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  .result-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  .axes-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-bottom: 1rem;
+  }
+  .axis-card {
+    background: var(--navy-mid);
+    border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 12px;
+  }
+  .axis-name { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; }
+  .axis-track { height: 5px; background: var(--surface-mid); border-radius: 3px; overflow: hidden; }
+  .axis-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  .axis-bottom { display: flex; justify-content: space-between; margin-top: 5px; }
+  .axis-pct { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .axis-status { font-size: 11px; color: var(--text-muted); }
+
+  .reco-card {
+    background: var(--navy-mid);
+    border: 0.5px solid var(--border-mid);
+    border-radius: 16px; padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .reco-card-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 12px; }
+  .reco-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+  .reco-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(201,162,39,0.15);
+    border: 0.5px solid rgba(201,162,39,0.3);
+    font-size: 11px; font-weight: 500; color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .reco-text { font-size: 13px; color: var(--text-secondary); line-height: 1.45; }
+
+  .cta-card {
+    background: linear-gradient(135deg, rgba(24,95,165,0.25) 0%, rgba(29,158,117,0.15) 100%);
+    border: 0.5px solid rgba(55,138,221,0.3);
+    border-radius: 16px; padding: 1.5rem;
+    text-align: center; margin-bottom: 1rem;
+  }
+  .cta-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text-primary); margin-bottom: 6px; }
+  .cta-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 12px 28px; border-radius: 10px;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s ease;
+    border: none;
+  }
+  .cta-btn:hover { background: var(--gold-light); }
+
+  .reset-btn {
+    width: 100%; padding: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: var(--text-muted);
+    background: transparent;
+    border: 0.5px solid var(--border);
+    border-radius: 10px; cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .reset-btn:hover { color: var(--text-primary); border-color: var(--border-mid); background: var(--surface); }
+
+  @media (max-width: 480px) {
+    .axes-grid { grid-template-columns: 1fr; }
+    .intro-title { font-size: 22px; }
+    body { padding: 1.25rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <div class="logo-group">
+      <div class="logo-circle">I</div>
+      <div>
+        <div class="logo-name">Ivory Consulting</div>
+        <div class="logo-tagline">Neuro-Performance & SEO Local · Guadeloupe</div>
+      </div>
+    </div>
+    <div class="header-badge">Outil gratuit</div>
+  </header>
+
+  <div id="quiz-section">
+    <div class="intro">
+      <div class="intro-eyebrow">Évaluation · 3 minutes</div>
+      <h1 class="intro-title">Votre score de maturité digitale</h1>
+      <p class="intro-sub">8 questions pour connaître votre niveau de visibilité Google, d'e-réputation et de conversion digitale.</p>
+      <div class="intro-pills">
+        <span class="intro-pill">GMB & visibilité Google</span>
+        <span class="intro-pill">Avis & e-réputation</span>
+        <span class="intro-pill">Conversion digitale</span>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span class="progress-axis" id="q-axis-label">Axe — Visibilité Google</span>
+        <span class="progress-count" id="q-count">1 / 8</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width: 12%;"></div>
+      </div>
+    </div>
+
+    <div id="question-container"></div>
+
+    <div class="nav-row">
+      <button class="btn" id="btn-prev" onclick="navigate(-1)" disabled>Précédent</button>
+      <button class="btn primary" id="btn-next" onclick="navigate(1)" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="result-section">
+    <div class="result-hero">
+      <div class="score-ring" id="score-ring">
+        <span class="score-num" id="score-display">—</span>
+        <span class="score-pct">/ 100</span>
+      </div>
+      <div class="result-level" id="result-level">—</div>
+      <p class="result-desc" id="result-desc">—</p>
+    </div>
+
+    <div class="axes-grid" id="axes-grid"></div>
+
+    <div class="reco-card">
+      <div class="reco-card-title">Vos 3 priorités immédiates</div>
+      <div id="reco-list"></div>
+    </div>
+
+    <div class="cta-card">
+      <div class="cta-title">Passez à l'étape suivante</div>
+      <p class="cta-sub">Audit express offert — 30 min pour transformer ces résultats en plan d'action concret avec Nadjé.</p>
+      <a class="cta-btn" href="https://calendly.com/guehinadje-ivoryconsulting/15min" target="_blank">Réserver mon audit gratuit</a>
+    </div>
+
+    <button class="reset-btn" onclick="resetQuiz()">Recommencer l'évaluation</button>
+  </div>
+
+</div>
+
+<script>
+  var questions = [
+    {
+      axis: "Visibilité Google",
+      axisColor: "#378ADD",
+      axisKey: "gmb",
+      text: "Votre fiche Google Business Profile est-elle créée et optimisée ?",
+      options: [
+        { label: "Je n'ai pas de fiche Google", detail: "Vous êtes invisible pour 70 % des recherches locales", score: 0 },
+        { label: "J'ai une fiche mais rarement mise à jour", detail: "Les horaires, photos et description ne sont plus à jour", score: 1 },
+        { label: "Ma fiche est à jour mais peu optimisée", detail: "Présente, mais sans stratégie de mots-clés locaux", score: 2 },
+        { label: "Fiche optimisée, photos récentes, description ciblée", detail: "Vous êtes dans le bon camp", score: 3 }
+      ]
+    },
+    {
+      axis: "E-réputation",
+      axisColor: "#1D9E75",
+      axisKey: "erep",
+      text: "Combien d'avis Google avez-vous, et à quelle fréquence en recevez-vous ?",
+      options: [
+        { label: "Moins de 10 avis, rarement de nouveaux", detail: "En dessous du seuil de crédibilité locale (30+)", score: 0 },
+        { label: "Entre 10 et 30 avis, quelques-uns par mois", detail: "Démarrage, mais sans système actif", score: 1 },
+        { label: "Plus de 30 avis, flux régulier", detail: "Bonne base, à amplifier", score: 2 },
+        { label: "Plus de 50 avis récents, note 4,3+", detail: "Profil crédible et actif", score: 3 }
+      ]
+    },
+    {
+      axis: "E-réputation",
+      axisColor: "#1D9E75",
+      axisKey: "erep",
+      text: "Comment gérez-vous les réponses aux avis clients ?",
+      options: [
+        { label: "Je ne réponds jamais aux avis", detail: "Signal négatif fort pour Google et les prospects", score: 0 },
+        { label: "Je réponds parfois, quand j'y pense", detail: "Irrégulier — l'algorithme pénalise l'inactivité", score: 1 },
+        { label: "Je réponds à la plupart sous 48h", detail: "Bon réflexe, à systématiser", score: 2 },
+        { label: "Je réponds à tous avec un message personnalisé", detail: "Excellente pratique — moteur de confiance", score: 3 }
+      ]
+    },
+    {
+      axis: "Collecte d'avis",
+      axisColor: "#EF9F27",
+      axisKey: "collect",
+      text: "Avez-vous un système actif pour demander des avis à vos clients satisfaits ?",
+      options: [
+        { label: "Non, je compte sur la bonne volonté des clients", detail: "Seulement 7 % laissent un avis spontanément", score: 0 },
+        { label: "Je le demande verbalement, parfois", detail: "Inefficace : le client oublie dès qu'il sort", score: 1 },
+        { label: "J'envoie un lien par SMS ou WhatsApp", detail: "Bien — mais le taux de clic reste limité", score: 2 },
+        { label: "J'ai un système physique (NFC, QR code) en point de vente", detail: "Le geste prend 2 secondes — conversion maximale", score: 3 }
+      ]
+    },
+    {
+      axis: "Présence en ligne",
+      axisColor: "#7F77DD",
+      axisKey: "presence",
+      text: "Comment décririez-vous votre présence sur les réseaux sociaux professionnels ?",
+      options: [
+        { label: "Aucune présence active", detail: "Opportunité de visibilité inexploitée", score: 0 },
+        { label: "Un compte créé mais peu actif (moins d'1 post par mois)", detail: "La régularité est la clé de l'algorithme", score: 1 },
+        { label: "Publications régulières (1 à 2 fois par semaine)", detail: "Bonne cadence — à renforcer avec du contenu expert", score: 2 },
+        { label: "Présence stratégique et engagement communautaire actif", detail: "Vous construisez de l'autorité locale", score: 3 }
+      ]
+    },
+    {
+      axis: "Conversion digitale",
+      axisColor: "#D85A30",
+      axisKey: "convert",
+      text: "Un prospect qui arrive sur votre fiche Google peut-il facilement vous contacter ou réserver ?",
+      options: [
+        { label: "Pas de lien de contact direct ou de réservation", detail: "Friction maximale — vous perdez des clients à ce stade", score: 0 },
+        { label: "Un numéro de téléphone visible uniquement", detail: "Fonctionnel mais limité", score: 1 },
+        { label: "Lien vers site ou WhatsApp accessible", detail: "Bien — à compléter avec un CTA clair", score: 2 },
+        { label: "Bouton de réservation directe ou formulaire en 1 clic", detail: "Parcours fluide = conversion maximale", score: 3 }
+      ]
+    },
+    {
+      axis: "Pilotage digital",
+      axisColor: "#378ADD",
+      axisKey: "pilotage",
+      text: "Mesurez-vous l'impact de votre présence Google (vues, clics, appels générés) ?",
+      options: [
+        { label: "Non, je ne sais pas où trouver ces données", detail: "Ce qu'on ne mesure pas, on ne peut pas améliorer", score: 0 },
+        { label: "Rarement — je jette un coup d'œil de temps en temps", detail: "Sans suivi régulier, impossible d'optimiser", score: 1 },
+        { label: "Je consulte mes stats GMB une fois par mois", detail: "Bonne pratique — à lier à des actions concrètes", score: 2 },
+        { label: "Suivi mensuel avec KPIs et ajustements stratégiques", detail: "Vous pilotez vraiment votre visibilité", score: 3 }
+      ]
+    },
+    {
+      axis: "Vision stratégique",
+      axisColor: "#1D9E75",
+      axisKey: "vision",
+      text: "Avez-vous une stratégie digitale définie pour les 6 prochains mois ?",
+      options: [
+        { label: "Non, je gère le digital au fil de l'eau", detail: "Sans cap, difficile de progresser durablement", score: 0 },
+        { label: "J'ai des idées mais rien de formalisé", detail: "Le potentiel est là — il manque la structure", score: 1 },
+        { label: "J'ai un plan partiel, quelques priorités claires", detail: "Bon départ — à consolider", score: 2 },
+        { label: "Stratégie documentée, actions planifiées et suivies", detail: "Vous avancez avec méthode", score: 3 }
+      ]
+    }
+  ];
+
+  var axisLabels = {
+    gmb: "Google My Business",
+    erep: "E-réputation",
+    collect: "Collecte d'avis",
+    presence: "Présence en ligne",
+    convert: "Conversion",
+    pilotage: "Pilotage",
+    vision: "Vision stratégique"
+  };
+
+  var current = 0;
+  var answers = [];
+  for (var i = 0; i < questions.length; i++) { answers.push(null); }
+
+  function renderQuestion(idx) {
+    var q = questions[idx];
+    var html = '<div class="question-card">';
+    html += '<div class="q-axis-row">';
+    html += '<div class="q-axis-dot" style="background:' + q.axisColor + '"></div>';
+    html += '<span class="q-axis-label">' + q.axis + '</span>';
+    html += '</div>';
+    html += '<div class="q-text">' + q.text + '</div>';
+    html += '<div class="q-options">';
+    for (var j = 0; j < q.options.length; j++) {
+      var opt = q.options[j];
+      var sel = answers[idx] === j ? ' selected' : '';
+      html += '<div class="q-option' + sel + '" onclick="selectOption(' + j + ')">';
+      html += '<div class="q-radio"><div class="q-radio-inner"></div></div>';
+      html += '<div class="q-option-body">';
+      html += '<div class="q-option-label">' + opt.label + '</div>';
+      html += '<div class="q-option-detail">' + opt.detail + '</div>';
+      html += '</div></div>';
+    }
+    html += '</div></div>';
+
+    document.getElementById('question-container').innerHTML = html;
+    document.getElementById('q-axis-label').textContent = 'Axe — ' + q.axis;
+    document.getElementById('q-count').textContent = (idx + 1) + ' / ' + questions.length;
+    document.getElementById('progress-fill').style.width = Math.round(((idx + 1) / questions.length) * 100) + '%';
+
+    document.getElementById('btn-prev').disabled = (idx === 0);
+    document.getElementById('btn-next').disabled = (answers[idx] === null);
+    document.getElementById('btn-next').textContent = (idx === questions.length - 1) ? 'Voir mes résultats' : 'Suivant';
+  }
+
+  function selectOption(optIdx) {
+    answers[current] = optIdx;
+    renderQuestion(current);
+  }
+
+  function navigate(dir) {
+    if (dir === 1 && current === questions.length - 1) {
+      showResults();
+      return;
+    }
+    current = current + dir;
+    if (current < 0) current = 0;
+    if (current > questions.length - 1) current = questions.length - 1;
+    renderQuestion(current);
+  }
+
+  function showResults() {
+    var total = 0;
+    for (var i = 0; i < answers.length; i++) {
+      if (answers[i] !== null) total += questions[i].options[answers[i]].score;
+    }
+    var maxScore = questions.length * 3;
+    var pct = Math.round((total / maxScore) * 100);
+
+    var axisScores = {};
+    var axisCounts = {};
+    for (var i = 0; i < questions.length; i++) {
+      var k = questions[i].axisKey;
+      if (!axisScores[k]) { axisScores[k] = 0; axisCounts[k] = 0; }
+      if (answers[i] !== null) axisScores[k] += questions[i].options[answers[i]].score;
+      axisCounts[k]++;
+    }
+
+    var level, desc, ringColor, recos;
+    if (pct <= 30) {
+      level = "Niveau 1 — Invisible en ligne";
+      desc = "Votre potentiel digital est presque entièrement inexploité. Chaque jour sans fiche Google optimisée, c'est des clients qui vont chez vos concurrents. La bonne nouvelle : les gains rapides sont nombreux.";
+      ringColor = "#E24B4A";
+      recos = [
+        "Créer et optimiser votre fiche Google Business Profile dans les 7 jours",
+        "Installer un système NFC de collecte d'avis en point de vente",
+        "Répondre à tous vos avis existants cette semaine — signal fort pour Google"
+      ];
+    } else if (pct <= 55) {
+      level = "Niveau 2 — Présence timide";
+      desc = "Vous avez posé quelques bases, mais votre visibilité Google ne travaille pas pour vous. Quelques ajustements ciblés peuvent doubler votre trafic entrant en 30 jours.";
+      ringColor = "#EF9F27";
+      recos = [
+        "Optimiser la description GMB avec les mots-clés de votre marché local",
+        "Passer à un système actif de collecte d'avis (NFC ou QR code en caisse)",
+        "Mettre en place un process de réponse aux avis sous 24h"
+      ];
+    } else if (pct <= 75) {
+      level = "Niveau 3 — Actif mais non optimisé";
+      desc = "Vous êtes sur la bonne voie. Votre présence existe et fonctionne partiellement. Ce qui vous manque : la régularité, l'automatisation et le pilotage par les données.";
+      ringColor = "#378ADD";
+      recos = [
+        "Automatiser les réponses aux avis avec un assistant GMB personnalisé",
+        "Créer 1 post GMB par semaine pour activer l'algorithme local",
+        "Mettre en place un tableau de bord mensuel de suivi des KPIs Google"
+      ];
+    } else {
+      level = "Niveau 4 — Maturité digitale avancée";
+      desc = "Vous avez construit une présence digitale solide. L'étape suivante : scaler ce système, l'affiner par les données et l'utiliser comme levier de développement commercial B2B.";
+      ringColor = "#1D9E75";
+      recos = [
+        "Intégrer le neuromanagement dans votre stratégie de contenu LinkedIn",
+        "Exploiter vos avis comme preuve sociale dans votre prospection B2B",
+        "Automatiser le reporting mensuel et challenger vos KPIs trimestriellement"
+      ];
+    }
+
+    document.getElementById('quiz-section').style.display = 'none';
+    document.getElementById('result-section').style.display = 'block';
+    document.getElementById('score-display').textContent = pct;
+    document.getElementById('score-ring').style.borderColor = ringColor;
+    document.getElementById('result-level').textContent = level;
+    document.getElementById('result-desc').textContent = desc;
+
+    var axesHtml = '';
+    var axisOrder = ['gmb', 'erep', 'collect', 'presence', 'convert', 'pilotage', 'vision'];
+    var axisColors = {
+      gmb: "#378ADD", erep: "#1D9E75", collect: "#EF9F27",
+      presence: "#7F77DD", convert: "#D85A30", pilotage: "#378ADD", vision: "#1D9E75"
+    };
+    for (var ki = 0; ki < axisOrder.length; ki++) {
+      var key = axisOrder[ki];
+      if (!axisScores[key]) continue;
+      var maxA = axisCounts[key] * 3;
+      var pctA = Math.round((axisScores[key] / maxA) * 100);
+      var col = axisColors[key];
+      var status = pctA < 40 ? 'À prioriser' : pctA < 70 ? 'En progression' : 'Solide';
+      axesHtml += '<div class="axis-card">';
+      axesHtml += '<div class="axis-name">' + axisLabels[key] + '</div>';
+      axesHtml += '<div class="axis-track"><div class="axis-fill" style="width:' + pctA + '%;background:' + col + '"></div></div>';
+      axesHtml += '<div class="axis-bottom"><span class="axis-pct">' + pctA + '%</span><span class="axis-status">' + status + '</span></div>';
+      axesHtml += '</div>';
+    }
+    document.getElementById('axes-grid').innerHTML = axesHtml;
+
+    var recoHtml = '';
+    for (var ri = 0; ri < recos.length; ri++) {
+      recoHtml += '<div class="reco-item">';
+      recoHtml += '<div class="reco-num">' + (ri + 1) + '</div>';
+      recoHtml += '<div class="reco-text">' + recos[ri] + '</div>';
+      recoHtml += '</div>';
+    }
+    document.getElementById('reco-list').innerHTML = recoHtml;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetQuiz() {
+    current = 0;
+    for (var i = 0; i < answers.length; i++) { answers[i] = null; }
+    document.getElementById('result-section').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'block';
+    renderQuestion(0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  renderQuestion(0);
+</script>
+</body>
+</html>
