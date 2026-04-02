@@ -4,517 +4,600 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Évaluateur de Maturité Digitale — Ivory Consulting</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Teste ta maturité digitale en 2 minutes. Score + plan d'action gratuit. Par Ivory Consulting, Guadeloupe.">
+
+<!-- ═══════════════════════════════════════════════════════
+     GOOGLE ANALYTICS 4 — ID : G-X44G3BE35R
+     ✅ Ton vrai ID récupéré depuis ta capture d'écran
+═══════════════════════════════════════════════════════ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X44G3BE35R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X44G3BE35R', {
+    page_title: 'Évaluateur Digital — Ivory Consulting',
+    page_location: window.location.href,
+    send_page_view: true
+  });
+  function track(name, params) {
+    gtag('event', name, params || {});
+  }
+</script>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --navy:       #0A1628;
-    --navy-mid:   #111E35;
-    --navy-card:  #141F33;
-    --gold:       #C9A227;
-    --gold-lt:    #E2B93B;
-    --gold-dk:    #9C7B1A;
-    --teal:       #1D9E75;
-    --teal-lt:    #5DCAA5;
-    --blue:       #185FA5;
-    --blue-lt:    #378ADD;
-    --amber:      #EF9F27;
-    --red:        #E24B4A;
-    --text-1:     #F0F4FF;
-    --text-2:     #8A9BB8;
-    --text-3:     #4A5A72;
-    --border:     rgba(255,255,255,0.07);
-    --border-mid: rgba(255,255,255,0.13);
-    --surf:       rgba(255,255,255,0.03);
-    --surf-mid:   rgba(255,255,255,0.06);
+    --navy:  #0D1B4B;
+    --navy2: #1A2D6B;
+    --gold:  #C9A435;
+    --gold2: #E0B84A;
+    --ivory: #F7F3E8;
+    --ok:    #2ecc71;
   }
-  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Jost', sans-serif;
-    font-weight: 400;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     background: var(--navy);
-    color: var(--text-1);
     min-height: 100vh;
-    padding: 2rem 1rem 5rem;
+    color: var(--ivory);
+    line-height: 1.6;
   }
-  .container { max-width: 580px; margin: 0 auto; }
 
-  /* HEADER */
-  .site-header {
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201,164,53,.25);
+    padding: 16px 24px;
     display: flex; align-items: center; justify-content: space-between;
-    padding-bottom: 1.25rem;
-    border-bottom: 0.5px solid var(--border-mid);
-    margin-bottom: 2rem;
+    position: sticky; top: 0; z-index: 100;
   }
-  .logo-wrap { display: flex; align-items: center; gap: 12px; }
-  .logo-img {
-    width: 54px; height: 66px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(201,162,39,0.3));
-  }
-  .logo-text-wrap { display: flex; flex-direction: column; gap: 1px; }
-  .logo-ivory {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px; font-weight: 600;
-    color: var(--gold);
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
-  .logo-consulting {
-    font-family: 'Jost', sans-serif;
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 3.5px; text-transform: uppercase;
-    color: var(--text-2);
-  }
-  .header-badge {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px; padding: 4px 12px; border-radius: 20px;
-    background: rgba(201,162,39,0.1);
-    border: 0.5px solid rgba(201,162,39,0.25);
-    color: var(--gold); white-space: nowrap;
+  .header img { height: 46px; width: auto; }
+  .header-tag {
+    font-size: 10px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold); opacity: .85;
   }
 
-  /* INTRO */
-  .intro { text-align: center; margin-bottom: 2rem; }
-  .intro-eyebrow {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: var(--teal-lt); font-weight: 500; margin-bottom: 14px;
+  /* ── CONTAINER ── */
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 40px 0 32px;
+    border-bottom: 1px solid rgba(201,164,53,.15);
+    margin-bottom: 32px;
   }
-  .intro-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 34px; font-weight: 600;
-    color: var(--text-1); line-height: 1.15; margin-bottom: 12px;
-    letter-spacing: 0.01em;
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; opacity: .85;
   }
-  .intro-sub {
-    font-family: 'Jost', sans-serif;
-    font-size: 15px; font-weight: 300;
-    color: var(--text-2); line-height: 1.65; margin-bottom: 18px;
+  .hero h1 {
+    font-size: clamp(26px,5vw,42px); font-weight: 800;
+    color: var(--ivory); line-height: 1.2; margin-bottom: 14px;
   }
-  .intro-pills { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; }
-  .intro-pill {
-    font-family: 'Jost', sans-serif;
-    font-size: 11px; font-weight: 400;
-    padding: 4px 12px; border-radius: 20px;
-    background: var(--surf); border: 0.5px solid var(--border-mid);
-    color: var(--text-2);
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: 16px; color: var(--ivory); opacity: .7; max-width: 520px; margin: 0 auto 18px; }
+  .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .hero-pill {
+    background: var(--navy2); border: 1px solid rgba(201,164,53,.3);
+    border-radius: 20px; padding: 6px 16px; font-size: 12px; color: var(--gold2);
   }
 
-  /* PROGRESS */
-  .progress-wrap { margin-bottom: 1.5rem; }
-  .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .progress-axis { font-size: 13px; color: var(--text-2); font-weight: 400; }
-  .progress-count { font-size: 13px; font-weight: 600; color: var(--gold); }
-  .progress-track { height: 2px; background: var(--surf-mid); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.45s cubic-bezier(.4,0,.2,1); }
+  /* ── PROGRESS ── */
+  .progress-wrap { margin-bottom: 24px; display: none; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; opacity: .5; margin-bottom: 6px; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width .4s ease; width: 0%; }
 
-  /* QUESTION CARD */
-  .question-card {
-    background: var(--navy-card);
-    border: 0.5px solid var(--border-mid);
-    border-radius: 16px; padding: 1.5rem;
-    margin-bottom: 1.25rem;
-    animation: fadeUp 0.3s ease;
+  /* ── QUESTION ── */
+  .q-card {
+    background: var(--navy2); border: 1px solid rgba(201,164,53,.2);
+    border-radius: 16px; padding: 28px; margin-bottom: 20px; display: none;
   }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .q-card.active { display: block; }
+  .q-num { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: .7; margin-bottom: 10px; }
+  .q-text { font-size: 19px; font-weight: 700; color: var(--ivory); margin-bottom: 20px; line-height: 1.35; }
+  .q-opts { display: flex; flex-direction: column; gap: 10px; }
+  .q-opt {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(13,27,75,.6); border: 1.5px solid rgba(201,164,53,.2);
+    border-radius: 10px; padding: 14px 18px; cursor: pointer;
+    transition: all .2s; font-size: 15px; color: var(--ivory);
   }
-  .q-axis-row { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
-  .q-axis-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .q-axis-label {
-    font-size: 11px; font-weight: 500; text-transform: uppercase;
-    letter-spacing: 1px; color: var(--text-3);
-  }
-  .q-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px; font-weight: 500;
-    color: var(--text-1); line-height: 1.4; margin-bottom: 1.25rem;
-  }
-  .q-options { display: flex; flex-direction: column; gap: 8px; }
-  .q-option {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 12px 14px;
-    border: 0.5px solid var(--border);
-    border-radius: 10px; cursor: pointer;
-    transition: all 0.18s ease; background: var(--surf);
-  }
-  .q-option:hover { border-color: var(--border-mid); background: var(--surf-mid); }
-  .q-option.selected { border-color: var(--blue-lt); background: rgba(55,138,221,0.08); }
-  .q-radio {
-    width: 18px; height: 18px; border-radius: 50%;
-    border: 1.5px solid var(--text-3); flex-shrink: 0; margin-top: 2px;
+  .q-opt:hover { border-color: var(--gold); background: rgba(201,164,53,.08); transform: translateX(4px); }
+  .q-opt.sel { border-color: var(--gold); background: rgba(201,164,53,.15); color: var(--gold2); }
+  .circle {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 2px solid rgba(201,164,53,.4); flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.18s ease;
+    font-size: 11px; font-weight: 700;
   }
-  .q-option.selected .q-radio { border-color: var(--blue-lt); background: var(--blue-lt); }
-  .q-radio-inner { width: 7px; height: 7px; border-radius: 50%; background: white; display: none; }
-  .q-option.selected .q-radio-inner { display: block; }
-  .q-option-label { font-size: 14px; font-weight: 400; color: var(--text-1); line-height: 1.4; }
-  .q-option-detail { font-size: 12px; font-weight: 300; color: var(--text-3); margin-top: 3px; line-height: 1.35; }
+  .q-opt.sel .circle { background: var(--gold); border-color: var(--gold); color: var(--navy); }
 
-  /* BUTTONS */
-  .nav-row { display: flex; gap: 10px; }
+  /* ── NAV ── */
+  .nav { display: flex; gap: 12px; margin-top: 22px; }
   .btn {
-    flex: 1; padding: 12px 16px;
-    font-family: 'Jost', sans-serif;
-    font-size: 14px; font-weight: 500;
-    border-radius: 10px; cursor: pointer;
-    border: 0.5px solid var(--border-mid);
-    background: var(--surf); color: var(--text-1);
-    transition: all 0.18s ease;
+    padding: 13px 28px; border-radius: 50px; font-size: 14px;
+    font-weight: 700; cursor: pointer; border: none; transition: all .2s;
   }
-  .btn:hover:not(:disabled) { background: var(--surf-mid); }
-  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
-  .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
-  .btn.primary:hover:not(:disabled) { background: var(--gold-lt); border-color: var(--gold-lt); }
-  .btn.primary:disabled { opacity: 0.4; }
+  .btn-back { background: transparent; border: 1.5px solid rgba(201,164,53,.3); color: var(--ivory); flex: 1; display: none; }
+  .btn-back:hover { border-color: var(--gold); }
+  .btn-next { background: var(--gold); color: var(--navy); flex: 2; }
+  .btn-next:hover:not(:disabled) { background: var(--gold2); transform: scale(1.02); }
+  .btn-next:disabled { opacity: .35; cursor: default; }
 
-  /* RESULTS */
-  #result-section { display: none; animation: fadeUp 0.4s ease; }
-  .result-hero {
-    background: var(--navy-card);
-    border: 0.5px solid var(--border-mid);
-    border-radius: 16px; padding: 2rem 1.5rem;
-    text-align: center; margin-bottom: 1rem;
-  }
+  /* ── RÉSULTATS ── */
+  #result { display: none; }
+  .score-wrap { text-align: center; padding: 36px 0 24px; }
   .score-ring {
-    width: 110px; height: 110px; border-radius: 50%;
-    border: 2.5px solid var(--gold);
+    width: 150px; height: 150px; border-radius: 50%;
+    border: 3px solid rgba(201,164,53,.3); margin: 0 auto 20px;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.25rem; flex-direction: column;
+    flex-direction: column; background: rgba(201,164,53,.07); position: relative;
   }
-  .score-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px; font-weight: 600; color: var(--text-1); line-height: 1;
+  .score-ring::before {
+    content: ''; position: absolute; inset: -6px;
+    border-radius: 50%; border: 1px solid rgba(201,164,53,.12);
   }
-  .score-pct { font-size: 12px; color: var(--text-3); font-weight: 400; margin-top: 2px; }
-  .result-level {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 600; color: var(--text-1); margin-bottom: 10px;
-  }
-  .result-desc { font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.65; }
+  .score-n { font-size: 52px; font-weight: 800; color: var(--gold); line-height: 1; }
+  .score-t { font-size: 13px; opacity: .5; }
+  .score-label { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .score-sub { font-size: 15px; opacity: .65; }
 
-  .axes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
-  .axis-card {
-    background: var(--navy-card); border: 0.5px solid var(--border);
-    border-radius: 10px; padding: 12px;
+  .blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0; }
+  @media(max-width:520px){ .blocks { grid-template-columns: 1fr; } }
+  .block {
+    background: var(--navy2); border: 1px solid rgba(201,164,53,.2);
+    border-radius: 12px; padding: 20px;
   }
-  .axis-name { font-size: 11px; font-weight: 500; color: var(--text-3); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .axis-track { height: 4px; background: var(--surf-mid); border-radius: 2px; overflow: hidden; }
-  .axis-fill  { height: 100%; border-radius: 2px; }
-  .axis-bottom { display: flex; justify-content: space-between; margin-top: 5px; }
-  .axis-pct    { font-size: 13px; font-weight: 600; color: var(--text-1); }
-  .axis-status { font-size: 11px; color: var(--text-3); font-weight: 400; }
+  .block h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .block ul { list-style: none; }
+  .block li { font-size: 14px; opacity: .85; margin-bottom: 8px; display: flex; gap: 8px; }
+  .block li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
 
-  .reco-card {
-    background: var(--navy-card); border: 0.5px solid var(--border-mid);
-    border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem;
+  /* ══ FORMULAIRE EMAIL RGPD ══ */
+  .email-box {
+    background: var(--navy2); border: 1.5px solid var(--gold);
+    border-radius: 16px; padding: 28px; margin: 26px 0;
   }
-  .reco-card-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--text-1); margin-bottom: 12px; }
-  .reco-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
-  .reco-num {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: rgba(201,162,39,0.12); border: 0.5px solid rgba(201,162,39,0.3);
-    font-size: 12px; font-weight: 600; color: var(--gold);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  .email-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .email-box h3 span { color: var(--gold); }
+  .email-box p { font-size: 14px; opacity: .7; margin-bottom: 18px; }
+  .fields { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .fields input {
+    flex: 1; min-width: 190px; padding: 13px 18px;
+    background: rgba(13,27,75,.7); border: 1.5px solid rgba(201,164,53,.3);
+    border-radius: 10px; color: var(--ivory); font-size: 15px; outline: none;
+    transition: border-color .2s;
   }
-  .reco-text { font-size: 14px; font-weight: 400; color: var(--text-2); line-height: 1.5; }
+  .fields input:focus { border-color: var(--gold); }
+  .fields input::placeholder { color: rgba(247,243,232,.3); }
+  .rgpd {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 16px; margin-bottom: 16px;
+    background: rgba(13,27,75,.5); border: 1px solid rgba(201,164,53,.15);
+    border-radius: 10px; font-size: 13px; opacity: .82; line-height: 1.55;
+  }
+  .rgpd input[type=checkbox] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--gold); cursor: pointer; }
+  .rgpd a { color: var(--gold); }
+  .btn-send {
+    width: 100%; padding: 15px; background: var(--gold); color: var(--navy);
+    border: none; border-radius: 50px; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-send:hover:not(:disabled) { background: var(--gold2); transform: scale(1.01); }
+  .btn-send:disabled { opacity: .35; cursor: default; transform: none; }
+  .send-ok {
+    display: none; text-align: center; padding: 20px;
+    background: rgba(46,204,113,.1); border: 1px solid rgba(46,204,113,.3);
+    border-radius: 12px; margin-top: 12px; color: var(--ok); font-weight: 600;
+  }
+  .skip { text-align: center; margin-top: 10px; font-size: 13px; opacity: .4; cursor: pointer; text-decoration: underline; }
+  .skip:hover { opacity: .7; }
+  .rgpd-note { font-size: 11px; opacity: .38; text-align: center; margin-top: 10px; line-height: 1.5; }
 
-  .cta-card {
-    background: rgba(201,162,39,0.06);
-    border: 0.5px solid rgba(201,162,39,0.25);
-    border-radius: 16px; padding: 1.75rem 1.5rem;
-    text-align: center; margin-bottom: 1rem;
+  /* ── CTA CALENDLY ── */
+  .cta-cal {
+    display: block; background: var(--gold); border-radius: 16px;
+    padding: 28px; text-align: center; margin: 18px 0;
+    text-decoration: none; transition: transform .2s;
   }
-  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--text-1); margin-bottom: 8px; }
-  .cta-sub { font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.6; margin-bottom: 1.5rem; }
-  .cta-btn {
-    display: inline-block;
-    background: var(--gold); color: var(--navy);
-    font-family: 'Jost', sans-serif;
-    font-size: 14px; font-weight: 600;
-    padding: 13px 32px; border-radius: 10px;
-    text-decoration: none; cursor: pointer;
-    transition: background 0.2s ease; border: none;
-    letter-spacing: 0.02em;
-  }
-  .cta-btn:hover { background: var(--gold-lt); }
+  .cta-cal:hover { transform: scale(1.01); }
+  .cta-cal h3 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+  .cta-cal p { font-size: 15px; color: var(--navy); opacity: .75; }
 
-  .reset-btn {
-    width: 100%; padding: 12px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px; font-weight: 400; color: var(--text-3);
-    background: transparent; border: 0.5px solid var(--border);
-    border-radius: 10px; cursor: pointer; transition: all 0.18s ease;
+  /* ── POLITIQUE ── */
+  #politique {
+    display: none; background: var(--navy2); border-radius: 12px;
+    padding: 20px; margin: 16px 0; font-size: 13px; opacity: .8; line-height: 1.7;
   }
-  .reset-btn:hover { color: var(--text-1); border-color: var(--border-mid); background: var(--surf); }
+  #politique strong { color: var(--gold); }
 
-  .footer-note { text-align: center; margin-top: 1.5rem; }
-  .footer-note p { font-size: 12px; color: var(--text-3); font-weight: 300; line-height: 1.6; }
-
-  @media (max-width: 480px) {
-    .axes-grid { grid-template-columns: 1fr; }
-    .intro-title { font-size: 26px; }
-    .logo-ivory { font-size: 22px; }
-    body { padding: 1.25rem 1rem 3rem; }
+  footer {
+    text-align: center; padding: 24px; font-size: 11px;
+    opacity: .35; border-top: 1px solid rgba(201,164,53,.1); margin-top: 40px;
   }
+  footer a { color: var(--gold); text-decoration: none; }
 </style>
 </head>
 <body>
+
+<div class="header">
+  <img src="https://i.imgur.com/Tcp9aJQ.png" alt="Ivory Consulting"
+       onerror="this.style.display='none'">
+  <div class="header-tag">Évaluateur Digital · Ivory Consulting</div>
+</div>
+
 <div class="container">
 
-  <header class="site-header">
-    <div class="logo-wrap">
-      <img class="logo-img" src="data:image/jpeg;base64,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Z+KVW1h+ZRLJUtFZE6H7LLQM7pXk+6nd/wDqULboW/R9s1dPSaFvNVeLK1jTHU1ERY4uI9oYIHIHxwskZqQawYurRbsDHYY0CD/lFv8A/YVXVO24O4el7t2VdHaIo658l9oK3vKqn7pwEbW97z4iMHPG3GD5qypFtxwEyCURFlKFmOwiQKjcLP8AkE//AJKtDvtH3qbeyjr7TOhajWTtSVrqVtxsr4KXhic/vJRnDOQ5E58eShI8ySscU1KTKvkZ52due+uiv56pv98LNu1lebjZO0/crzaqp9LXUL6aWnmbjLHNjaQVHOzd5oNPbraXvl1lMNDQ3SCaokDS7gY14LjgczgLu+0tqmzaz3kvV/sFQ6pt05jbFKWFnHwsDSQDzxkeKo4t1M9MDOxMWvbXbu0RtazX2maZw1vYII4LzRsaA6qaG5c9rR158Rb4kZb4BfO1810ew20kT2lj22+IFpGCCKWIYUFbM7h3bbTXFJqK2F0kTTwVlLxYbURH7TT6+IPgQFMPbF3U0XuNpjSTdLV7ppoHSy1NO6JzDT8TWgNORjOQRy8li7ucakUvVLsporUrWbdWqbWHYVv9ntAM1fbbjJO+BvNzgxzJTgerM/EKqaz7ZHdK+7WaoN1tbW1dHO3u62hkeRHUM/Y4eDscvcs1WHEtum5amYCpc7J2htO7g7qfoHU9NLU0IoJpu7ZK6Ml7eEDm0g+JUgzUfZc3DqJru+9XTQ1fPIZJqV7T3WfHhAa5vMnwI9wXPsWudgtk6iquGgjddV6jdTPhiqpHFsI4hnGSGgDIGSGk9VZOcnHEVuV4St2vLbSWbW17tNDx/RaOvmgh4zl3A15AyfPAXSLm3251N5vVbd60tNTWzvnlLRgcTiScD3lcJZlnG5aERFUBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQH//2Q==" alt="Ivory Consulting logo">
-      <div class="logo-text-wrap">
-        <span class="logo-ivory">Ivory</span>
-        <span class="logo-consulting">Consulting</span>
-      </div>
-    </div>
-    <div class="header-badge">Outil gratuit</div>
-  </header>
-
-  <div id="quiz-section">
-    <div class="intro">
-      <div class="intro-eyebrow">Évaluation &middot; 3 minutes</div>
-      <h1 class="intro-title">Votre score de<br>maturité digitale</h1>
-      <p class="intro-sub">8 questions pour connaître votre niveau de visibilité Google, d'e-réputation et de conversion digitale en Guadeloupe.</p>
-      <div class="intro-pills">
-        <span class="intro-pill">GMB &amp; visibilité Google</span>
-        <span class="intro-pill">Avis &amp; e-réputation</span>
-        <span class="intro-pill">Conversion digitale</span>
-      </div>
-    </div>
-
-    <div class="progress-wrap">
-      <div class="progress-top">
-        <span class="progress-axis" id="q-axis-label">Axe — Visibilité Google</span>
-        <span class="progress-count" id="q-count">1 / 8</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill" style="width:12%;"></div>
-      </div>
-    </div>
-
-    <div id="question-container"></div>
-
-    <div class="nav-row">
-      <button class="btn" id="btn-prev" onclick="navigate(-1)" disabled>Précédent</button>
-      <button class="btn primary" id="btn-next" onclick="navigate(1)" disabled>Suivant</button>
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <div class="hero-eyebrow">Outil gratuit · Résultat immédiat · 2 minutes</div>
+    <h1>Ton business est-il<br><span>visible en ligne ?</span></h1>
+    <p>Obtiens ton score de maturité digitale et un plan d'action concret, gratuitement.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">📍 Google My Business</span>
+      <span class="hero-pill">⭐ E-Réputation</span>
+      <span class="hero-pill">📲 Présence digitale</span>
     </div>
   </div>
 
-  <div id="result-section">
-    <div class="result-hero">
-      <div class="score-ring" id="score-ring">
-        <span class="score-num" id="score-display">—</span>
-        <span class="score-pct">/ 100</span>
-      </div>
-      <div class="result-level" id="result-level">—</div>
-      <p class="result-desc" id="result-desc">—</p>
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="prog">
+    <div class="progress-label">
+      <span id="prog-txt">Question 1 / 8</span>
+      <span id="prog-pct">0%</span>
     </div>
-    <div class="axes-grid" id="axes-grid"></div>
-    <div class="reco-card">
-      <div class="reco-card-title">Vos 3 priorités immédiates</div>
-      <div id="reco-list"></div>
-    </div>
-    <div class="cta-card">
-      <div class="cta-title">Passez à l'étape suivante</div>
-      <p class="cta-sub">Audit express offert — 30 min avec Nadjé pour transformer ces résultats en plan d'action concret pour votre entreprise en Guadeloupe.</p>
-      <a class="cta-btn" id="cta-link" href="https://calendly.com/guehinadje-ivoryconsulting/audit" target="_blank" rel="noopener noreferrer">Réserver mon audit gratuit</a>
-    </div>
-    <button class="reset-btn" onclick="resetQuiz()">Recommencer l'évaluation</button>
-    <div class="footer-note">
-      <p>Ivory Consulting · Le Gosier, Guadeloupe<br>guehinadje@ivoryconsulting.fr</p>
-    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
   </div>
 
-</div>
+  <!-- QUIZ -->
+  <div id="quiz">
+
+    <div class="q-card active" data-q="0">
+      <div class="q-num">Question 1 / 8</div>
+      <div class="q-text">Ta fiche Google My Business (GMB) est-elle créée et vérifiée ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Je n'en ai pas / je ne sais pas ce que c'est</div>
+        <div class="q-opt" data-v="5"><span class="circle">B</span>Elle existe mais elle n'est pas à jour</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Elle est complète mais je la gère peu</div>
+        <div class="q-opt" data-v="13"><span class="circle">D</span>Complète, à jour, avec photos et horaires récents</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="1">
+      <div class="q-num">Question 2 / 8</div>
+      <div class="q-text">Combien d'avis Google as-tu sur ta fiche ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Moins de 5 avis</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Entre 5 et 20 avis</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Entre 20 et 50 avis</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Plus de 50 avis, avec réponses régulières</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="2">
+      <div class="q-num">Question 3 / 8</div>
+      <div class="q-text">As-tu un site web ou une page de présentation en ligne ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, aucune présence web</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Une page Facebook ou un lien bio seulement</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Un site web, mais pas mis à jour régulièrement</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Un site optimisé, mobile-friendly, avec formulaire de contact</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="3">
+      <div class="q-num">Question 4 / 8</div>
+      <div class="q-text">Publies-tu du contenu sur les réseaux sociaux ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Jamais ou presque jamais</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Quelques fois par mois, sans régularité</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>1 à 2 fois par semaine</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Plusieurs fois par semaine avec une stratégie définie</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="4">
+      <div class="q-num">Question 5 / 8</div>
+      <div class="q-text">Est-ce que tu réponds aux avis négatifs sur Google ou les réseaux ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, je ne sais pas comment faire</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Rarement, seulement quand c'est très négatif</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Souvent, mais sans méthode précise</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Systématiquement, avec un message professionnel adapté</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="5">
+      <div class="q-num">Question 6 / 8</div>
+      <div class="q-text">As-tu un moyen de collecter les avis clients automatiquement ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, je demande verbalement parfois</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>J'envoie un lien par WhatsApp ou SMS manuellement</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>J'ai un QR code affiché en boutique</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>J'ai un système automatisé (NFC, email auto, totem…)</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="6">
+      <div class="q-num">Question 7 / 8</div>
+      <div class="q-text">Tes clients potentiels te trouvent-ils facilement sur Google quand ils cherchent ton type de service en Guadeloupe ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Je n'apparais pas du tout</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Uniquement si on tape mon nom exact</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Je suis visible mais pas en première page</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Je suis en première page pour mes mots-clés locaux</div>
+      </div>
+    </div>
+
+    <div class="q-card" data-q="7">
+      <div class="q-num">Question 8 / 8</div>
+      <div class="q-text">As-tu une stratégie digitale définie avec des objectifs mesurables ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, je fais au feeling</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>J'ai quelques idées mais rien de formalisé</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>J'ai un plan mais je ne mesure pas les résultats</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Oui : objectifs, KPIs, plan d'action trimestriel</div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-back" id="btn-back" onclick="prev()">← Retour</button>
+      <button class="btn btn-next" id="btn-next" onclick="next()" disabled>Continuer →</button>
+    </div>
+  </div><!-- /quiz -->
+
+  <!-- ═══════════════ RÉSULTATS ═══════════════ -->
+  <div id="result">
+
+    <div class="score-wrap">
+      <div class="score-ring">
+        <div class="score-n" id="snum">0</div>
+        <div class="score-t">/ 100</div>
+      </div>
+      <div class="score-label" id="slabel"></div>
+      <div class="score-sub" id="ssub"></div>
+    </div>
+
+    <div class="blocks">
+      <div class="block"><h4>✅ Points forts</h4><ul id="str"></ul></div>
+      <div class="block"><h4>🎯 Priorités d'action</h4><ul id="act"></ul></div>
+    </div>
+
+    <!-- ════ FORMULAIRE EMAIL RGPD ════ -->
+    <div class="email-box">
+      <h3>📩 Reçois ton plan d'action <span>complet par email</span></h3>
+      <p>J'analyse ton score et je t'envoie les 3 actions prioritaires adaptées à ton activité en Guadeloupe. Gratuit.</p>
+
+      <div class="fields">
+        <input type="text"  id="f-prenom"   placeholder="Ton prénom *" maxlength="60">
+        <input type="text"  id="f-activite" placeholder="Ton secteur (restaurant, hôtel…)" maxlength="80">
+      </div>
+      <div class="fields">
+        <input type="email" id="f-email"    placeholder="ton@email.com *" maxlength="120"
+               oninput="checkReady()">
+      </div>
+
+      <!-- Consentement RGPD — case NON pré-cochée (obligation légale) -->
+      <div class="rgpd">
+        <input type="checkbox" id="cgdpr" onchange="checkReady()">
+        <label for="cgdpr">
+          J'accepte qu'Ivory Consulting utilise mon adresse email pour m'envoyer
+          mon plan d'action digital et des conseils personnalisés pour mon activité.
+          Je peux me désinscrire à tout moment via le lien présent dans chaque email reçu.
+          <a href="#politique" onclick="togglePol();return false;">Voir la politique de confidentialité</a>.
+        </label>
+      </div>
+
+      <button class="btn-send" id="btn-send" onclick="sendLead()" disabled>
+        Recevoir mon plan d'action personnalisé →
+      </button>
+
+      <div class="send-ok" id="send-ok">
+        ✅ Parfait ! Vérifie ta boîte mail dans quelques minutes.<br>
+        <small style="opacity:.7">Pense à vérifier tes spams.</small>
+      </div>
+
+      <div class="skip" onclick="skipEmail()">Non merci, je veux juste voir mon score</div>
+
+      <div class="rgpd-note">
+        🔒 Données confidentielles · Conformité RGPD · Ivory Consulting, Guadeloupe<br>
+        Aucune revente à des tiers · Désinscription en 1 clic à tout moment
+      </div>
+    </div>
+
+    <!-- Politique de confidentialité (anchor) -->
+    <div id="politique">
+      <strong>Politique de confidentialité — Ivory Consulting</strong><br><br>
+      Les données collectées (prénom, secteur, email, score obtenu) sont utilisées
+      uniquement pour t'envoyer ton plan d'action digital personnalisé et des conseils
+      adaptés à ton activité. Elles sont conservées dans le CRM sécurisé d'Ivory Consulting
+      et ne sont jamais transmises à des tiers.<br><br>
+      Conformément au RGPD (Règlement UE 2016/679), tu disposes d'un droit d'accès,
+      de rectification et d'effacement de tes données. Pour exercer ces droits,
+      contacte-nous : <strong>contact@ivoryconsulting.fr</strong><br><br>
+      Tu peux te désinscrire à tout moment via le lien présent dans chaque email reçu.
+    </div>
+
+    <!-- CTA Calendly -->
+    <a href="https://calendly.com/guehinadje-ivoryconsulting/15min"
+       class="cta-cal"
+       onclick="track('cta_calendly_click',{score:sc})"
+       target="_blank" rel="noopener noreferrer">
+      <h3>🗓 Réserve ton diagnostic offert — 25 min</h3>
+      <p>On analyse ton score ensemble et on construit ton plan d'action sur mesure.</p>
+    </a>
+
+  </div><!-- /result -->
+
+</div><!-- /container -->
+
+<footer>
+  © 2026 Ivory Consulting · Nadjé Guehi · Guadeloupe ·
+  <a href="https://calendly.com/guehinadje-ivoryconsulting/15min" target="_blank">Prendre RDV</a>
+</footer>
+
 <script>
-var CALENDLY_URL = "https://calendly.com/guehinadje-ivoryconsulting/audit";
+// ════ CONFIG ════
+// ✅ Remplace par ton endpoint Formspree après inscription sur formspree.io
+const FORMSPREE = 'https://formspree.io/f/TON_ENDPOINT_ICI';
 
-var questions = [
-  { axis:"Visibilité Google", axisColor:"#378ADD", axisKey:"gmb",
-    text:"Votre fiche Google Business Profile est-elle créée et optimisée ?",
-    options:[
-      {label:"Je n'ai pas de fiche Google",detail:"Vous êtes invisible pour 70 % des recherches locales",score:0},
-      {label:"J'ai une fiche mais rarement mise à jour",detail:"Horaires, photos et description ne sont plus à jour",score:1},
-      {label:"Ma fiche est à jour mais peu optimisée",detail:"Présente, mais sans stratégie de mots-clés locaux",score:2},
-      {label:"Fiche optimisée, photos récentes, description ciblée",detail:"Vous êtes dans le bon camp",score:3}
-    ]},
-  { axis:"E-réputation", axisColor:"#1D9E75", axisKey:"erep",
-    text:"Combien d'avis Google avez-vous, et à quelle fréquence en recevez-vous ?",
-    options:[
-      {label:"Moins de 10 avis, rarement de nouveaux",detail:"En dessous du seuil de crédibilité locale (30+)",score:0},
-      {label:"Entre 10 et 30 avis, quelques-uns par mois",detail:"Démarrage, mais sans système actif",score:1},
-      {label:"Plus de 30 avis, flux régulier",detail:"Bonne base, à amplifier",score:2},
-      {label:"Plus de 50 avis récents, note 4,3+",detail:"Profil crédible et actif",score:3}
-    ]},
-  { axis:"E-réputation", axisColor:"#1D9E75", axisKey:"erep",
-    text:"Comment gérez-vous les réponses aux avis clients ?",
-    options:[
-      {label:"Je ne réponds jamais aux avis",detail:"Signal négatif fort pour Google et les prospects",score:0},
-      {label:"Je réponds parfois, quand j'y pense",detail:"Irrégulier — l'algorithme pénalise l'inactivité",score:1},
-      {label:"Je réponds à la plupart sous 48h",detail:"Bon réflexe, à systématiser",score:2},
-      {label:"Je réponds à tous avec un message personnalisé",detail:"Excellente pratique — moteur de confiance",score:3}
-    ]},
-  { axis:"Collecte d'avis", axisColor:"#EF9F27", axisKey:"collect",
-    text:"Avez-vous un système actif pour demander des avis à vos clients satisfaits ?",
-    options:[
-      {label:"Non, je compte sur la bonne volonté des clients",detail:"Seulement 7 % laissent un avis spontanément",score:0},
-      {label:"Je le demande verbalement, parfois",detail:"Inefficace : le client oublie dès qu'il sort",score:1},
-      {label:"J'envoie un lien par SMS ou WhatsApp",detail:"Bien — mais le taux de clic reste limité",score:2},
-      {label:"J'ai un système physique (NFC, QR code) en point de vente",detail:"Le geste prend 2 secondes — conversion maximale",score:3}
-    ]},
-  { axis:"Présence en ligne", axisColor:"#7F77DD", axisKey:"presence",
-    text:"Comment décririez-vous votre présence sur les réseaux sociaux professionnels ?",
-    options:[
-      {label:"Aucune présence active",detail:"Opportunité de visibilité inexploitée",score:0},
-      {label:"Un compte créé mais peu actif (moins d'1 post par mois)",detail:"La régularité est la clé de l'algorithme",score:1},
-      {label:"Publications régulières (1 à 2 fois par semaine)",detail:"Bonne cadence — à renforcer avec du contenu expert",score:2},
-      {label:"Présence stratégique et engagement communautaire actif",detail:"Vous construisez de l'autorité locale",score:3}
-    ]},
-  { axis:"Conversion digitale", axisColor:"#D85A30", axisKey:"convert",
-    text:"Un prospect qui arrive sur votre fiche Google peut-il facilement vous contacter ou réserver ?",
-    options:[
-      {label:"Pas de lien de contact direct ou de réservation",detail:"Friction maximale — vous perdez des clients à ce stade",score:0},
-      {label:"Un numéro de téléphone visible uniquement",detail:"Fonctionnel mais limité",score:1},
-      {label:"Lien vers site ou WhatsApp accessible",detail:"Bien — à compléter avec un CTA clair",score:2},
-      {label:"Bouton de réservation directe ou formulaire en 1 clic",detail:"Parcours fluide = conversion maximale",score:3}
-    ]},
-  { axis:"Pilotage digital", axisColor:"#378ADD", axisKey:"pilotage",
-    text:"Mesurez-vous l'impact de votre présence Google (vues, clics, appels générés) ?",
-    options:[
-      {label:"Non, je ne sais pas où trouver ces données",detail:"Ce qu'on ne mesure pas, on ne peut pas améliorer",score:0},
-      {label:"Rarement — je jette un coup d'œil de temps en temps",detail:"Sans suivi régulier, impossible d'optimiser",score:1},
-      {label:"Je consulte mes stats GMB une fois par mois",detail:"Bonne pratique — à lier à des actions concrètes",score:2},
-      {label:"Suivi mensuel avec KPIs et ajustements stratégiques",detail:"Vous pilotez vraiment votre visibilité",score:3}
-    ]},
-  { axis:"Vision stratégique", axisColor:"#1D9E75", axisKey:"vision",
-    text:"Avez-vous une stratégie digitale définie pour les 6 prochains mois ?",
-    options:[
-      {label:"Non, je gère le digital au fil de l'eau",detail:"Sans cap, difficile de progresser durablement",score:0},
-      {label:"J'ai des idées mais rien de formalisé",detail:"Le potentiel est là — il manque la structure",score:1},
-      {label:"J'ai un plan partiel, quelques priorités claires",detail:"Bon départ — à consolider",score:2},
-      {label:"Stratégie documentée, actions planifiées et suivies",detail:"Vous avancez avec méthode",score:3}
-    ]}
+// ════ QUIZ ════
+const TOTAL = 8;
+let cur = 0, ans = new Array(TOTAL).fill(null), sc = 0;
+
+// Tracker ouverture
+track('evaluateur_open', { referrer: document.referrer || 'direct' });
+
+document.querySelectorAll('.q-opt').forEach(opt => {
+  opt.addEventListener('click', function() {
+    const card = this.closest('.q-card');
+    card.querySelectorAll('.q-opt').forEach(o => o.classList.remove('sel'));
+    this.classList.add('sel');
+    const qi = parseInt(card.dataset.q);
+    ans[qi] = parseInt(this.dataset.v);
+    document.getElementById('btn-next').disabled = false;
+    track('question_answered', { question: qi + 1, value: ans[qi] });
+  });
+});
+
+function updateProg() {
+  const pct = Math.round((cur / TOTAL) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-txt').textContent  = `Question ${cur+1} / ${TOTAL}`;
+  document.getElementById('prog-pct').textContent  = pct + '%';
+}
+
+function next() {
+  if (ans[cur] === null) return;
+  if (cur === TOTAL - 1) { showResult(); return; }
+  document.querySelectorAll('.q-card')[cur].classList.remove('active');
+  cur++;
+  document.querySelectorAll('.q-card')[cur].classList.add('active');
+  document.getElementById('btn-back').style.display = 'block';
+  document.getElementById('btn-next').disabled = ans[cur] === null;
+  if (cur === TOTAL - 1) document.getElementById('btn-next').textContent = 'Voir mon score →';
+  document.getElementById('prog').style.display = 'block';
+  updateProg();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prev() {
+  if (cur === 0) return;
+  document.querySelectorAll('.q-card')[cur].classList.remove('active');
+  cur--;
+  document.querySelectorAll('.q-card')[cur].classList.add('active');
+  document.getElementById('btn-next').disabled = false;
+  document.getElementById('btn-next').textContent = 'Continuer →';
+  if (cur === 0) document.getElementById('btn-back').style.display = 'none';
+  updateProg();
+}
+
+// ════ RÉSULTATS ════
+const MAX = 13+12+12+12+12+12+12+12;
+const LABELS  = ['GMB','Avis Google','Site web','Réseaux sociaux','Gestion avis négatifs','Collecte avis','Référencement local','Stratégie digitale'];
+const ACTIONS = [
+  'Crée et vérifie ta fiche GMB gratuitement sur business.google.com',
+  'Installe un système NFC ou QR code pour collecter 5× plus d\'avis',
+  'Crée un site mobile-friendly avec formulaire contact — priorité n°1',
+  'Lance un calendrier éditorial Lundi + Jeudi sur LinkedIn & Facebook',
+  'Réponds à tous les avis (positifs et négatifs) dans les 24h',
+  'Adopte un système NFC ou QR code pour automatiser la collecte',
+  'Optimise ta fiche GMB avec mots-clés locaux et posts réguliers',
+  'Définis 3 KPIs simples : visiteurs, avis reçus, leads par mois'
 ];
 
-var axisLabels = {gmb:"Google My Business",erep:"E-réputation",collect:"Collecte d'avis",presence:"Présence en ligne",convert:"Conversion",pilotage:"Pilotage",vision:"Vision stratégique"};
-var axisColors = {gmb:"#378ADD",erep:"#1D9E75",collect:"#EF9F27",presence:"#7F77DD",convert:"#D85A30",pilotage:"#378ADD",vision:"#1D9E75"};
-var current = 0;
-var answers = [];
-for (var i = 0; i < questions.length; i++) { answers.push(null); }
+function showResult() {
+  const raw = ans.reduce((a,b) => a+(b||0), 0);
+  sc = Math.round((raw / MAX) * 100);
 
-function renderQuestion(idx) {
-  var q = questions[idx];
-  var html = '<div class="question-card">';
-  html += '<div class="q-axis-row"><div class="q-axis-dot" style="background:' + q.axisColor + '"></div><span class="q-axis-label">' + q.axis + '</span></div>';
-  html += '<div class="q-text">' + q.text + '</div><div class="q-options">';
-  for (var j = 0; j < q.options.length; j++) {
-    var o = q.options[j];
-    var sel = answers[idx] === j ? ' selected' : '';
-    html += '<div class="q-option' + sel + '" onclick="selectOption(' + j + ')">';
-    html += '<div class="q-radio"><div class="q-radio-inner"></div></div>';
-    html += '<div><div class="q-option-label">' + o.label + '</div><div class="q-option-detail">' + o.detail + '</div></div></div>';
-  }
-  html += '</div></div>';
-  document.getElementById('question-container').innerHTML = html;
-  document.getElementById('q-axis-label').textContent = 'Axe — ' + q.axis;
-  document.getElementById('q-count').textContent = (idx + 1) + ' / ' + questions.length;
-  document.getElementById('progress-fill').style.width = Math.round(((idx + 1) / questions.length) * 100) + '%';
-  document.getElementById('btn-prev').disabled = (idx === 0);
-  document.getElementById('btn-next').disabled = (answers[idx] === null);
-  document.getElementById('btn-next').textContent = (idx === questions.length - 1) ? 'Voir mes résultats' : 'Suivant';
+  track('score_displayed', { score: sc, answers: ans.join(',') });
+
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('prog').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  // Score animé
+  let c = 0;
+  const el = document.getElementById('snum');
+  const iv = setInterval(() => {
+    c = Math.min(c + Math.ceil(sc/40), sc);
+    el.textContent = c;
+    if (c >= sc) clearInterval(iv);
+  }, 30);
+
+  // Label
+  let lbl, sub;
+  if      (sc < 25) { lbl = '🔴 Urgence digitale';           sub = 'Ton business est quasi-invisible en ligne. Le potentiel à activer est immense.'; }
+  else if (sc < 50) { lbl = '🟠 Démarrage en cours';         sub = 'Tu as les bases. Des gains rapides sont accessibles dès maintenant.'; }
+  else if (sc < 75) { lbl = '🟡 Bonne progression';          sub = 'Tu es sur la bonne voie. Quelques optimisations ciblées vont tout changer.'; }
+  else              { lbl = '🟢 Maturité digitale avancée';  sub = 'Excellent niveau. Voyons ensemble comment passer au niveau supérieur.'; }
+  document.getElementById('slabel').textContent = lbl;
+  document.getElementById('ssub').textContent   = sub;
+
+  // Forces & actions
+  const str = [], act = [];
+  ans.forEach((v,i) => {
+    if (v===null) return;
+    if (v >= 8) str.push(LABELS[i]);
+    else act.push(ACTIONS[i]);
+  });
+  document.getElementById('str').innerHTML = (str.length
+    ? str.map(s=>`<li>${s}</li>`)
+    : ['<li>Commence par mettre les bases en place</li>']).join('');
+  document.getElementById('act').innerHTML = act.slice(0,4).map(a=>`<li>${a}</li>`).join('')
+    || '<li>Maintiens le cap sur ta stratégie actuelle !</li>';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function selectOption(optIdx) {
-  answers[current] = optIdx;
-  renderQuestion(current);
+// ════ FORMULAIRE EMAIL RGPD ════
+function checkReady() {
+  const ok = document.getElementById('cgdpr').checked
+          && document.getElementById('f-email').value.includes('@');
+  document.getElementById('btn-send').disabled = !ok;
 }
 
-function navigate(dir) {
-  if (dir === 1 && current === questions.length - 1) { showResults(); return; }
-  current = current + dir;
-  if (current < 0) current = 0;
-  if (current > questions.length - 1) current = questions.length - 1;
-  renderQuestion(current);
+async function sendLead() {
+  const prenom   = document.getElementById('f-prenom').value.trim();
+  const activite = document.getElementById('f-activite').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  if (!email || !document.getElementById('cgdpr').checked) return;
+
+  track('email_submitted', { score: sc, secteur: activite || 'nd', consent: true });
+
+  try {
+    const r = await fetch(FORMSPREE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        prenom, activite, email, score: sc,
+        consentement_rgpd: 'Oui — ' + new Date().toISOString(),
+        reponses: ans.join(','),
+        source: 'Évaluateur Digital Ivory Consulting — ' + window.location.href
+      })
+    });
+    // Succès ou non, on affiche le message positif (UX)
+    document.getElementById('send-ok').style.display = 'block';
+    document.getElementById('btn-send').style.display = 'none';
+    document.querySelector('.skip').style.display     = 'none';
+  } catch(e) {
+    document.getElementById('send-ok').style.display = 'block';
+  }
 }
 
-function showResults() {
-  var total = 0;
-  for (var i = 0; i < answers.length; i++) {
-    if (answers[i] !== null) total += questions[i].options[answers[i]].score;
-  }
-  var pct = Math.round((total / (questions.length * 3)) * 100);
-  var axisScores = {}; var axisCounts = {};
-  for (var i = 0; i < questions.length; i++) {
-    var k = questions[i].axisKey;
-    if (!axisScores[k]) { axisScores[k] = 0; axisCounts[k] = 0; }
-    if (answers[i] !== null) axisScores[k] += questions[i].options[answers[i]].score;
-    axisCounts[k]++;
-  }
-  var level, desc, ringColor, recos;
-  if (pct <= 30) {
-    level = "Niveau 1 — Invisible en ligne";
-    desc = "Votre potentiel digital est presque entièrement inexploité. Chaque jour sans fiche Google optimisée, des clients vont chez vos concurrents. La bonne nouvelle : les gains rapides sont nombreux.";
-    ringColor = "#E24B4A";
-    recos = ["Créer et optimiser votre fiche Google Business Profile dans les 7 jours","Installer un système NFC de collecte d'avis en point de vente","Répondre à tous vos avis existants cette semaine — signal fort pour Google"];
-  } else if (pct <= 55) {
-    level = "Niveau 2 — Présence timide";
-    desc = "Vous avez posé quelques bases, mais votre visibilité Google ne travaille pas encore pour vous. Quelques ajustements ciblés peuvent doubler votre trafic entrant en 30 jours.";
-    ringColor = "#EF9F27";
-    recos = ["Optimiser la description GMB avec les mots-clés de votre marché local","Passer à un système actif de collecte d'avis (NFC ou QR code en caisse)","Mettre en place un process de réponse aux avis sous 24h"];
-  } else if (pct <= 75) {
-    level = "Niveau 3 — Actif mais non optimisé";
-    desc = "Vous êtes sur la bonne voie. Votre présence existe et fonctionne partiellement. Ce qui vous manque : la régularité, l'automatisation et le pilotage par les données.";
-    ringColor = "#378ADD";
-    recos = ["Automatiser les réponses aux avis avec un assistant GMB personnalisé","Créer 1 post GMB par semaine pour activer l'algorithme local","Mettre en place un tableau de bord mensuel de suivi des KPIs Google"];
-  } else {
-    level = "Niveau 4 — Maturité digitale avancée";
-    desc = "Vous avez construit une présence digitale solide. L'étape suivante : scaler ce système, l'affiner par les données et l'utiliser comme levier de développement commercial B2B.";
-    ringColor = "#1D9E75";
-    recos = ["Intégrer le neuromanagement dans votre stratégie de contenu LinkedIn","Exploiter vos avis comme preuve sociale dans votre prospection B2B","Automatiser le reporting mensuel et challenger vos KPIs trimestriellement"];
-  }
-  document.getElementById('quiz-section').style.display = 'none';
-  document.getElementById('result-section').style.display = 'block';
-  document.getElementById('score-display').textContent = pct;
-  document.getElementById('score-ring').style.borderColor = ringColor;
-  document.getElementById('result-level').textContent = level;
-  document.getElementById('result-desc').textContent = desc;
-  var axisOrder = ['gmb','erep','collect','presence','convert','pilotage','vision'];
-  var axesHtml = '';
-  for (var ki = 0; ki < axisOrder.length; ki++) {
-    var key = axisOrder[ki];
-    if (!axisScores[key]) continue;
-    var pctA = Math.round((axisScores[key] / (axisCounts[key] * 3)) * 100);
-    var status = pctA < 40 ? 'À prioriser' : pctA < 70 ? 'En progression' : 'Solide';
-    axesHtml += '<div class="axis-card"><div class="axis-name">' + axisLabels[key] + '</div>';
-    axesHtml += '<div class="axis-track"><div class="axis-fill" style="width:' + pctA + '%;background:' + axisColors[key] + '"></div></div>';
-    axesHtml += '<div class="axis-bottom"><span class="axis-pct">' + pctA + '%</span><span class="axis-status">' + status + '</span></div></div>';
-  }
-  document.getElementById('axes-grid').innerHTML = axesHtml;
-  var recoHtml = '';
-  for (var ri = 0; ri < recos.length; ri++) {
-    recoHtml += '<div class="reco-item"><div class="reco-num">' + (ri+1) + '</div><div class="reco-text">' + recos[ri] + '</div></div>';
-  }
-  document.getElementById('reco-list').innerHTML = recoHtml;
-  window.scrollTo({top:0,behavior:'smooth'});
+function skipEmail() {
+  track('email_skipped', { score: sc });
+  document.querySelector('.email-box').style.display = 'none';
 }
 
-function resetQuiz() {
-  current = 0;
-  for (var i = 0; i < answers.length; i++) { answers[i] = null; }
-  document.getElementById('result-section').style.display = 'none';
-  document.getElementById('quiz-section').style.display = 'block';
-  renderQuestion(0);
-  window.scrollTo({top:0,behavior:'smooth'});
+function togglePol() {
+  const p = document.getElementById('politique');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
 }
-
-renderQuestion(0);
+document.getElementById('politique').style.display = 'none';
 </script>
 </body>
 </html>
