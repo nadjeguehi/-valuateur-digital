@@ -6,7 +6,7 @@
 <title>Évaluateur de Maturité Digitale — Ivory Consulting</title>
 <meta name="description" content="Teste ta maturité digitale en 2 minutes. Score + plan d'action PDF gratuit. Par Ivory Consulting, Guadeloupe.">
 
-<!-- Google Analytics 4 -->
+<!-- Google Analytics 4 — G-X44G3BE35R -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X44G3BE35R"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -16,14 +16,10 @@
   function track(n, p) { gtag('event', n, p || {}); }
 </script>
 
-<!-- jsPDF pour génération PDF côté client -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-:root {
-  --navy:#0D1B4B; --navy2:#1A2D6B; --gold:#C9A435;
-  --gold2:#E0B84A; --ivory:#F7F3E8; --ok:#2ecc71;
-}
+:root { --navy:#0D1B4B; --navy2:#1A2D6B; --gold:#C9A435; --gold2:#E0B84A; --ivory:#F7F3E8; --ok:#2ecc71; }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--navy);min-height:100vh;color:var(--ivory);line-height:1.6}
 
@@ -96,14 +92,12 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--n
 .btn-send{width:100%;padding:15px;background:var(--gold);color:var(--navy);border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
 .btn-send:hover:not(:disabled){background:var(--gold2);transform:scale(1.01)}
 .btn-send:disabled{opacity:.35;cursor:default;transform:none}
-.send-ok{display:none;text-align:center;padding:20px;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);border-radius:12px;margin-top:12px;color:var(--ok);font-weight:600}
+.send-ok{display:none;text-align:center;padding:18px;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);border-radius:12px;margin-top:12px;color:var(--ok);font-weight:600}
 .rgpd-note{font-size:11px;opacity:.38;text-align:center;margin-top:10px;line-height:1.5;color:var(--ivory)}
 
-/* ── PDF DOWNLOAD ── */
 .pdf-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:transparent;border:1.5px solid var(--gold);color:var(--gold);border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:14px}
 .pdf-btn:hover{background:rgba(201,164,53,.1)}
 
-/* ── CTA CALENDLY ── */
 .cta-cal{display:block;background:var(--gold);border-radius:16px;padding:28px;text-align:center;margin:18px 0;text-decoration:none;transition:transform .2s}
 .cta-cal:hover{transform:scale(1.01)}
 .cta-cal h3{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px}
@@ -202,7 +196,7 @@ footer a{color:var(--gold);text-decoration:none}
     </div>
     <div class="q-card" data-q="6">
       <div class="q-num">Question 7 / 8</div>
-      <div class="q-text">Tes clients potentiels te trouvent-ils facilement sur Google quand ils cherchent ton type de service en Guadeloupe ?</div>
+      <div class="q-text">Tes clients potentiels te trouvent-ils facilement sur Google en Guadeloupe ?</div>
       <div class="q-opts">
         <div class="q-opt" data-v="0"><span class="circle">A</span>Je n'apparais pas du tout</div>
         <div class="q-opt" data-v="4"><span class="circle">B</span>Uniquement si on tape mon nom exact</div>
@@ -228,6 +222,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   <!-- ════════════ RÉSULTATS ════════════ -->
   <div id="result">
+
     <div class="score-wrap">
       <div class="score-ring">
         <div class="score-n" id="snum">0</div>
@@ -237,42 +232,42 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="score-sub" id="ssub"></div>
     </div>
 
+    <p style="margin-top:15px;font-size:14px;opacity:.8;text-align:center;">
+      💡 Ton plan détaillé est disponible immédiatement ci-dessous.<br>
+      Le mail contient un résumé + tes prochaines actions prioritaires.
+    </p>
+
     <div class="blocks">
       <div class="block"><h4>✅ Points forts</h4><ul id="str"></ul></div>
       <div class="block"><h4>🎯 Priorités d'action</h4><ul id="act"></ul></div>
     </div>
 
-    <!-- Formulaire Formspree -->
-    <form action="https://formspree.io/f/xlgownvg" method="POST" class="email-box" id="lead-form">
-      <h3>📩 Reçois ton plan d'action <span>complet par email</span></h3>
-      <p>Je t'envoie les 3 actions prioritaires adaptées à ton activité + un accès à ton PDF personnalisé.</p>
+    <!-- ════ FORMULAIRE → MAKE WEBHOOK ════ -->
+    <div class="email-box">
+      <h3>📩 Reçois ton plan d'action <span>par email</span></h3>
+      <p>Télécharge ton plan personnalisé immédiatement ci-dessous et reçois un résumé + conseils directement dans ta boîte mail.</p>
       <div class="fields">
-        <input type="text"  name="prenom"   id="f-prenom"   placeholder="Ton prénom *" required maxlength="60">
-        <input type="text"  name="activite" id="f-activite" placeholder="Ton secteur (restaurant, hôtel…)" maxlength="80">
+        <input type="text"  id="f-prenom"   placeholder="Ton prénom *" maxlength="60">
+        <input type="text"  id="f-activite" placeholder="Ton secteur (restaurant, hôtel…)" maxlength="80">
       </div>
       <div class="fields">
-        <input type="email" name="email" id="f-email" placeholder="ton@email.com *" required maxlength="120">
+        <input type="email" id="f-email" placeholder="ton@email.com *" maxlength="120" oninput="checkReady()">
       </div>
-      <input type="hidden" name="score"     id="form-score">
-      <input type="hidden" name="reponses"  id="form-reponses">
-      <input type="hidden" name="source"    value="quiz-e-reputation">
-      <input type="hidden" name="timestamp" id="form-timestamp">
       <div class="rgpd">
-        <input type="checkbox" name="rgpd" id="cgdpr" required>
-        <label for="cgdpr">J'accepte qu'Ivory Consulting utilise mon adresse email pour m'envoyer mon plan d'action digital et des conseils personnalisés. Désinscription possible à tout moment.</label>
+        <input type="checkbox" id="cgdpr" onchange="checkReady()">
+        <label for="cgdpr">J'accepte l'utilisation de mes données pour recevoir mon plan d'action.</label>
       </div>
-      <button class="btn-send" type="submit" id="btn-send">
-        Recevoir mon plan d'action personnalisé →
+      <button class="btn-send" id="btn-send" onclick="sendLead()" disabled>
+        Recevoir mon analyse →
       </button>
       <div class="send-ok" id="send-ok">
-        ✅ C'est parti ! Vérifie ta boîte mail dans quelques minutes.<br>
-        <small style="opacity:.7">Pense à vérifier tes spams si nécessaire.</small>
+        ✅ Plan envoyé. Vérifie tes emails (et tes spams).
       </div>
       <div class="rgpd-note">🔒 RGPD · Ivory Consulting · Guadeloupe · Aucune revente · Désinscription en 1 clic</div>
-    </form>
+    </div>
 
-    <!-- Téléchargement PDF direct -->
-    <button class="pdf-btn" onclick="downloadPDF()" id="pdf-dl-btn">
+    <!-- PDF download -->
+    <button class="pdf-btn" onclick="downloadPDF()">
       📄 Télécharger mon plan d'action PDF personnalisé
     </button>
 
@@ -286,9 +281,8 @@ footer a{color:var(--gold);text-decoration:none}
       <span class="cta-link">→ calendly.com/guehinadje-ivoryconsulting/audit</span>
     </a>
 
-  </div>
-
-</div>
+  </div><!-- /result -->
+</div><!-- /container -->
 
 <footer>
   © 2026 Ivory Consulting · Nadjé Guehi · Guadeloupe ·
@@ -296,10 +290,20 @@ footer a{color:var(--gold);text-decoration:none}
 </footer>
 
 <script>
+// ════════════════════════════════════════════════════
+// CONFIG — NE PAS MODIFIER
+// ════════════════════════════════════════════════════
+const MAKE_WEBHOOK = 'https://hook.us2.make.com/dcjtp7iu3rk78lxloqgps8gwshuu0wer';
+const CALENDLY    = 'https://calendly.com/guehinadje-ivoryconsulting/audit';
+
+// ════════════════════════════════════════════════════
+// QUIZ
+// ════════════════════════════════════════════════════
 const TOTAL = 8;
-let cur = 0, ans = new Array(TOTAL).fill(null), sc = 0, leadPrenom = '', leadActivite = '';
-const CALENDLY = 'https://calendly.com/guehinadje-ivoryconsulting/audit';
-const LABELS  = ['Fiche GMB','Avis Google','Site web','Réseaux sociaux','Gestion avis','Collecte avis','Référencement local','Stratégie digitale'];
+let cur = 0, ans = new Array(TOTAL).fill(null), sc = 0;
+let leadPrenom = '', leadActivite = '';
+
+const LABELS = ['Fiche GMB','Avis Google','Site web','Réseaux sociaux','Gestion avis','Collecte avis','Référencement local','Stratégie digitale'];
 const LABELS_LONG = ['Fiche Google My Business','Avis Google','Site web','Réseaux sociaux','Gestion des avis négatifs','Collecte avis automatique','Référencement local','Stratégie digitale'];
 const ACTIONS = [
   'Créer et vérifier ta fiche GMB sur business.google.com — gratuit et immédiat.',
@@ -316,8 +320,8 @@ const MAX_VALS = [13,12,12,12,12,12,12,12];
 
 track('evaluateur_open', { referrer: document.referrer || 'direct' });
 
-document.querySelectorAll('.q-opt').forEach(function(opt) {
-  opt.addEventListener('click', function() {
+document.querySelectorAll('.q-opt').forEach(function(opt){
+  opt.addEventListener('click', function(){
     var card = this.closest('.q-card');
     card.querySelectorAll('.q-opt').forEach(function(o){ o.classList.remove('sel'); });
     this.classList.add('sel');
@@ -328,49 +332,40 @@ document.querySelectorAll('.q-opt').forEach(function(opt) {
   });
 });
 
-function updateProg() {
+function updateProg(){
   var pct = Math.round((cur/TOTAL)*100);
   document.getElementById('prog-fill').style.width = pct+'%';
   document.getElementById('prog-txt').textContent = 'Question '+(cur+1)+' / '+TOTAL;
   document.getElementById('prog-pct').textContent = pct+'%';
 }
-function next() {
-  if (ans[cur]===null) return;
-  if (cur===TOTAL-1){ showResult(); return; }
+function next(){
+  if(ans[cur]===null) return;
+  if(cur===TOTAL-1){ showResult(); return; }
   document.querySelectorAll('.q-card')[cur].classList.remove('active');
   cur++;
   document.querySelectorAll('.q-card')[cur].classList.add('active');
   document.getElementById('btn-back').style.display='block';
   document.getElementById('btn-next').disabled = ans[cur]===null;
-  if (cur===TOTAL-1) document.getElementById('btn-next').textContent='Voir mon score →';
+  if(cur===TOTAL-1) document.getElementById('btn-next').textContent='Voir mon score →';
   document.getElementById('prog').style.display='block';
   updateProg();
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function prev() {
-  if (cur===0) return;
+function prev(){
+  if(cur===0) return;
   document.querySelectorAll('.q-card')[cur].classList.remove('active');
   cur--;
   document.querySelectorAll('.q-card')[cur].classList.add('active');
   document.getElementById('btn-next').disabled=false;
   document.getElementById('btn-next').textContent='Continuer →';
-  if (cur===0) document.getElementById('btn-back').style.display='none';
+  if(cur===0) document.getElementById('btn-back').style.display='none';
   updateProg();
 }
 
-function showResult() {
+function showResult(){
   var raw = ans.reduce(function(a,b){return a+(b||0);},0);
   sc = Math.round((raw/MAX)*100);
-
-  // Injection champs cachés
-  var fs = document.getElementById('form-score');
-  var fr = document.getElementById('form-reponses');
-  var ft = document.getElementById('form-timestamp');
-  if(fs) fs.value = sc;
-  if(fr) fr.value = ans.join(',');
-  if(ft) ft.value = Date.now();
-
-  track('score_displayed',{score:sc, answers:ans.join(',')});
+  track('score_displayed', { score: sc, answers: ans.join(',') });
 
   document.getElementById('hero').style.display='none';
   document.getElementById('quiz').style.display='none';
@@ -379,337 +374,212 @@ function showResult() {
 
   var el=document.getElementById('snum'), c2=0;
   var iv=setInterval(function(){
-    c2=Math.min(c2+Math.ceil(sc/40),sc);
-    el.textContent=c2;
+    c2=Math.min(c2+Math.ceil(sc/40),sc); el.textContent=c2;
     if(c2>=sc) clearInterval(iv);
   },30);
 
   var lbl, sub;
-  if      (sc<25){lbl='🔴 Urgence digitale';       sub='Ton business est quasi-invisible en ligne. Le potentiel à activer est immense.';}
-  else if (sc<50){lbl='🟠 Démarrage en cours';     sub='Tu as les bases. Des gains rapides sont accessibles dès maintenant.';}
-  else if (sc<75){lbl='🟡 Bonne progression';      sub='Tu es sur la bonne voie. Quelques optimisations ciblées vont tout changer.';}
-  else           {lbl='🟢 Maturité digitale avancée';sub='Excellent niveau. Voyons ensemble comment passer au niveau supérieur.';}
+  if      (sc<25){lbl='🔴 Urgence digitale';          sub='Ton business est quasi-invisible en ligne. Le potentiel à activer est immense.';}
+  else if (sc<50){lbl='🟠 Démarrage en cours';        sub='Tu as les bases. Des gains rapides sont accessibles dès maintenant.';}
+  else if (sc<75){lbl='🟡 Bonne progression';         sub='Tu es sur la bonne voie. Quelques optimisations ciblées vont tout changer.';}
+  else           {lbl='🟢 Maturité digitale avancée'; sub='Excellent niveau. Voyons ensemble comment passer au niveau supérieur.';}
   document.getElementById('slabel').textContent=lbl;
   document.getElementById('ssub').textContent=sub;
 
   var str=[], act=[];
-  ans.forEach(function(v,i){
-    if(v===null) return;
-    if(v>=8) str.push(LABELS[i]);
-    else act.push(ACTIONS[i]);
-  });
+  ans.forEach(function(v,i){ if(v===null) return; if(v>=8) str.push(LABELS[i]); else act.push(ACTIONS[i]); });
   document.getElementById('str').innerHTML=(str.length?str.map(function(s){return'<li>'+s+'</li>';}):'<li>Commence par les bases</li>').join('');
   document.getElementById('act').innerHTML=act.slice(0,4).map(function(a){return'<li>'+a+'</li>';}).join('')||'<li>Maintiens le cap !</li>';
-
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── Tracking soumission ──
-var form=document.getElementById('lead-form');
-if(form){
-  form.addEventListener('submit',function(){
-    leadPrenom   = document.getElementById('f-prenom').value.trim();
-    leadActivite = document.getElementById('f-activite').value.trim();
-    track('email_submitted',{score:sc, source:'quiz-e-reputation'});
-    setTimeout(function(){
-      document.getElementById('send-ok').style.display='block';
-    },800);
-  });
+// ════ FORMULAIRE → MAKE WEBHOOK (JSON) ════
+function checkReady(){
+  var ok = document.getElementById('cgdpr').checked
+        && document.getElementById('f-email').value.includes('@');
+  document.getElementById('btn-send').disabled = !ok;
 }
 
-// ══════════════════════════════════════════════════════
-// GÉNÉRATION PDF DYNAMIQUE (jsPDF)
-// ══════════════════════════════════════════════════════
-function downloadPDF() {
-  var doc = new window.jspdf.jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
-  var W = 210, H = 297;
+async function sendLead(){
+  var prenom   = document.getElementById('f-prenom').value.trim();
+  var activite = document.getElementById('f-activite').value.trim();
+  var email    = document.getElementById('f-email').value.trim();
+  if(!email || !document.getElementById('cgdpr').checked) return;
 
-  // ── Couleurs ──
-  var NAVY_RGB  = [13,27,75];
-  var NAVY2_RGB = [26,45,107];
-  var GOLD_RGB  = [201,164,53];
-  var IVORY_RGB = [247,243,232];
-  var GREEN_RGB = [61,186,122];
-  var RED_RGB   = [224,82,82];
-  var AMBER_RGB = [224,160,48];
+  leadPrenom   = prenom;
+  leadActivite = activite;
 
-  function setFill(r,g,b){ doc.setFillColor(r,g,b); }
-  function setStroke(r,g,b){ doc.setDrawColor(r,g,b); }
-  function setTxt(r,g,b){ doc.setTextColor(r,g,b); }
+  document.getElementById('btn-send').disabled = true;
+  document.getElementById('btn-send').textContent = 'Envoi en cours…';
 
-  var today = new Date();
-  var dateStr = today.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+  track('lead_sent', { score: sc, source: 'quiz-e-reputation' });
+
+  try {
+    // ── Envoi JSON vers Make Webhook ──
+    await fetch(MAKE_WEBHOOK, {
+      method: 'POST',
+      mode: 'no-cors',          // Make webhook accepte no-cors
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prenom:   prenom   || 'Non renseigné',
+        email:    email,
+        activite: activite || 'Non renseigné',
+        score:    sc,
+        reponses: ans.join(','),
+        source:   'quiz-e-reputation',
+        timestamp: Date.now(),
+        consentement_rgpd: 'Oui — ' + new Date().toISOString()
+      })
+    });
+  } catch(e) {
+    // no-cors ne renvoie pas d'erreur, on affiche toujours le succès
+    console.log('Webhook sent');
+  }
+
+  // Afficher succès dans tous les cas
+  document.getElementById('send-ok').style.display = 'block';
+  document.getElementById('btn-send').style.display = 'none';
+}
+
+// ════ PDF jsPDF ════
+function downloadPDF(){
+  var doc = new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+  var W=210, H=297;
   var prenom   = leadPrenom   || 'Votre résultat';
   var activite = leadActivite || '';
+  var today    = new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
 
-  // ══ PAGE 1 — COVER ══
-  setFill(...NAVY_RGB); doc.rect(0,0,W,H,'F');
-  // Barre gold gauche
-  setFill(...GOLD_RGB); doc.rect(0,0,2,H,'F');
-  // Cercles décoratifs
-  setStroke(...GOLD_RGB); doc.setLineWidth(0.3);
-  doc.setDrawColor(201,164,53); doc.setAlpha ? null : null;
-  doc.circle(W-20,20,45,'S');
-  doc.circle(W-20,20,35,'S');
-  doc.circle(20,H-20,35,'S');
+  function sf(r,g,b){doc.setFillColor(r,g,b);}
+  function st(r,g,b){doc.setTextColor(r,g,b);}
+  function ss(r,g,b){doc.setDrawColor(r,g,b);}
+  var NAVY=[13,27,75],NAVY2=[26,45,107],GOLD=[201,164,53],IVORY=[247,243,232];
+  var GREEN=[61,186,122],RED=[224,82,82],AMBER=[224,160,48];
 
-  // Header tag
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(8);
-  setTxt(...GOLD_RGB);
-  doc.setCharSpace(2);
-  doc.text('IVORY CONSULTING  ·  GUADELOUPE', W/2, 28, {align:'center'});
-  doc.setCharSpace(0);
-
-  // Trait gold
-  setFill(...GOLD_RGB); doc.rect(W/2-18,31,36,0.6,'F');
-
-  // Grand titre
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(24);
-  setTxt(...IVORY_RGB);
-  doc.text('TON PLAN D\'ACTION DIGITAL', W/2, 52, {align:'center'});
-  doc.setFontSize(16);
-  setTxt(...GOLD_RGB);
-  doc.text('Personnalise · Pret a appliquer', W/2, 62, {align:'center'});
-
-  // Trait gold 2
-  setFill(...GOLD_RGB); doc.rect(W/2-14,66,28,0.5,'F');
-
-  // Sous-titre
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(10);
-  setTxt(...IVORY_RGB);
-  doc.setTextColor(247,243,232); doc.setGState ? null : null;
-  doc.text('Prepare pour : '+prenom+'  ·  '+dateStr, W/2, 76, {align:'center'});
-
-  // Cercle score central
-  var cy = H/2 + 5;
-  setFill(...NAVY2_RGB); doc.circle(W/2, cy, 32, 'F');
-  setStroke(...GOLD_RGB); doc.setLineWidth(1.5);
-  doc.circle(W/2, cy, 32, 'S');
-  doc.setLineWidth(0.4);
-  doc.circle(W/2, cy, 36, 'S');
-
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(40);
-  setTxt(...GOLD_RGB);
+  // PAGE 1 — COVER
+  sf(...NAVY); doc.rect(0,0,W,H,'F');
+  sf(...GOLD); doc.rect(0,0,2,H,'F');
+  ss(...GOLD); doc.setLineWidth(0.3);
+  doc.circle(W-20,20,45,'S'); doc.circle(W-20,20,32,'S'); doc.circle(15,H-15,30,'S');
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...GOLD);
+  doc.text('IVORY CONSULTING  ·  GUADELOUPE', W/2, 26, {align:'center'});
+  sf(...GOLD); doc.rect(W/2-18,29,36,0.5,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(24); st(...IVORY);
+  doc.text("TON PLAN D'ACTION DIGITAL", W/2, 50, {align:'center'});
+  doc.setFontSize(15); st(...GOLD);
+  doc.text('Personnalise · Pret a appliquer', W/2, 60, {align:'center'});
+  sf(...GOLD); doc.rect(W/2-14,64,28,0.5,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); st(...IVORY);
+  doc.text('Prepare pour : '+prenom+'  ·  '+today, W/2, 73, {align:'center'});
+  var cy=H/2+5;
+  sf(...NAVY2); doc.circle(W/2,cy,32,'F');
+  ss(...GOLD); doc.setLineWidth(1.5); doc.circle(W/2,cy,32,'S');
+  doc.setLineWidth(0.4); doc.circle(W/2,cy,37,'S');
+  doc.setFont('helvetica','bold'); doc.setFontSize(40); st(...GOLD);
   doc.text(String(sc), W/2, cy+8, {align:'center'});
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(10);
-  setTxt(...IVORY_RGB);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); st(...IVORY);
   doc.text('/ 100', W/2, cy+18, {align:'center'});
-
-  // Label score
-  var slabels = sc<25?'URGENCE DIGITALE':sc<50?'DEMARRAGE EN COURS':sc<75?'BONNE PROGRESSION':'MATURITE AVANCEE';
-  var scols   = sc<25?RED_RGB:sc<50?AMBER_RGB:sc<75?GOLD_RGB:GREEN_RGB;
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(12);
-  setTxt(...scols);
-  doc.text(slabels, W/2, cy+35, {align:'center'});
-
-  // Sous-titre score
-  var subs = sc<25?'Quasi-invisible en ligne. Potentiel immense a activer.':
-             sc<50?'Les bases sont la. Des gains rapides sont possibles.':
-             sc<75?'Sur la bonne voie. Quelques optimisations cles.':
-                   'Excellent niveau. Voyons comment progresser encore.';
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(9);
-  setTxt(...IVORY_RGB);
-  doc.setTextColor(247,243,232);
-  doc.text(subs, W/2, cy+44, {align:'center', maxWidth:120});
-
-  // Activite
+  var slabels=sc<25?'URGENCE DIGITALE':sc<50?'DEMARRAGE EN COURS':sc<75?'BONNE PROGRESSION':'MATURITE AVANCEE';
+  var scols=sc<25?RED:sc<50?AMBER:sc<75?GOLD:GREEN;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...scols);
+  doc.text(slabels, W/2, cy+34, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); st(...IVORY);
+  var subs=sc<25?'Quasi-invisible en ligne. Potentiel immense a activer.':sc<50?'Les bases sont la. Des gains rapides sont possibles.':sc<75?'Sur la bonne voie. Quelques optimisations cles.':'Excellent niveau. Voyons comment progresser encore.';
+  doc.text(subs, W/2, cy+43, {align:'center', maxWidth:120});
   if(activite){
-    setFill(...NAVY2_RGB);
-    doc.roundedRect(W/2-40, cy+52, 80, 12, 3, 3, 'F');
-    setStroke(...GOLD_RGB); doc.setLineWidth(0.5);
-    doc.roundedRect(W/2-40, cy+52, 80, 12, 3, 3, 'S');
-    doc.setFontSize(9);
-    setTxt(...GOLD_RGB);
-    doc.text('Secteur : '+activite, W/2, cy+60, {align:'center'});
+    sf(...NAVY2); doc.roundedRect(W/2-42,cy+50,84,12,3,3,'F');
+    ss(...GOLD); doc.setLineWidth(0.5); doc.roundedRect(W/2-42,cy+50,84,12,3,3,'S');
+    doc.setFontSize(9); st(...GOLD);
+    doc.text('Secteur : '+activite, W/2, cy+58, {align:'center'});
   }
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); st(...IVORY);
+  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  1/3', W/2, H-8, {align:'center'});
+  doc.link(10,H-14,W-20,10,{url:CALENDLY});
 
-  // Footer page 1
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(7);
-  setTxt(247,243,232);
-  doc.setTextColor(247,243,232);
-  doc.text('Ivory Consulting  ·  Nadjé Guehi  ·  Guadeloupe  ·  calendly.com/guehinadje-ivoryconsulting/audit  |  1/3', W/2, H-8, {align:'center'});
-  doc.link(10, H-14, W-20, 10, {url: CALENDLY});
-
-  // ══ PAGE 2 — ANALYSE DÉTAILLÉE ══
+  // PAGE 2 — ANALYSE
   doc.addPage();
-  setFill(247,243,232); doc.rect(0,0,W,H,'F');
-  setFill(...GOLD_RGB); doc.rect(0,0,2,H,'F');
-  setFill(...NAVY_RGB); doc.rect(0,H-2,W,2,'F');
-
-  // Header bande navy
-  setFill(...NAVY_RGB); doc.rect(0,H-14,W,14,'F');
-
-  // Bande header haut
-  setFill(...NAVY_RGB); doc.rect(0,0,W,18,'F');
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(12);
-  setTxt(...IVORY_RGB);
-  doc.text('ANALYSE PAR CRITERE', 28, 12);
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(8);
-  setTxt(...GOLD_RGB);
+  sf(...IVORY); doc.rect(0,0,W,H,'F');
+  sf(...GOLD); doc.rect(0,0,2,H,'F');
+  sf(...NAVY); doc.rect(0,0,W,18,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...IVORY);
+  doc.text('ANALYSE PAR CRITERE', 14, 12);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...GOLD);
   doc.text('Evaluateur Digital · Ivory Consulting', W-8, 12, {align:'right'});
-
-  // Intro
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(9);
-  setTxt(...NAVY_RGB);
-  doc.text('Voici le detail de ton evaluation sur les 8 criteres cles de ta maturite digitale.', 14, 28);
-  setFill(...GOLD_RGB); doc.rect(14, 31, 60, 0.4, 'F');
-
-  // Barres
-  var y2 = 40;
-  var rowH = 26;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); st(...NAVY);
+  doc.text('Detail de ton evaluation sur les 8 criteres cles de ta maturite digitale.', 14, 28);
+  sf(...GOLD); doc.rect(14,31,60,0.4,'F');
+  var y2=40, rowH=26;
   for(var i=0;i<8;i++){
-    var val = ans[i]||0;
-    var mx  = MAX_VALS[i];
-    var pct2 = val/mx;
-    var bgCol = i%2===0 ? [237,232,213] : [247,243,232];
-    setFill(...bgCol); doc.roundedRect(10,y2,W-20,rowH-2,2,2,'F');
-
-    // Pastille numéro
-    setFill(...GOLD_RGB); doc.circle(21,y2+rowH/2-1,5,'F');
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7);
-    setTxt(...NAVY_RGB);
+    var val=ans[i]||0, mx=MAX_VALS[i], pct2=val/mx;
+    var bgCol=i%2===0?[237,232,213]:[247,243,232];
+    sf(...bgCol); doc.roundedRect(10,y2,W-20,rowH-2,2,2,'F');
+    sf(...GOLD); doc.circle(21,y2+rowH/2-1,5,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); st(...NAVY);
     doc.text(String(i+1),21,y2+rowH/2+1.5,{align:'center'});
-
-    // Label
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(9);
-    setTxt(...NAVY_RGB);
+    doc.setFont('helvetica','bold'); doc.setFontSize(9); st(...NAVY);
     doc.text(LABELS_LONG[i],30,y2+10);
-
-    // Barre
     var bx=30,bw=W-110,by=y2+15;
-    setFill(200,195,180); doc.roundedRect(bx,by,bw,4,2,2,'F');
-    var fillCol = pct2>=0.67?GREEN_RGB:pct2>=0.34?AMBER_RGB:RED_RGB;
-    setFill(...fillCol);
-    doc.roundedRect(bx,by,Math.max(bw*pct2,4),4,2,2,'F');
-
-    // Score + niveau
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(8);
-    setTxt(...NAVY_RGB);
+    sf(200,195,180); doc.roundedRect(bx,by,bw,4,2,2,'F');
+    var fillCol=pct2>=0.67?GREEN:pct2>=0.34?AMBER:RED;
+    sf(...fillCol); doc.roundedRect(bx,by,Math.max(bw*pct2,4),4,2,2,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); st(...NAVY);
     doc.text(val+'/'+mx, W-20, y2+10, {align:'right'});
-    var niv = pct2>=0.67?'Excellent':pct2>=0.34?'En cours':'A ameliorer';
-    setTxt(...fillCol);
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(7);
+    var niv=pct2>=0.67?'Excellent':pct2>=0.34?'En cours':'A ameliorer';
+    st(...fillCol); doc.setFont('helvetica','normal'); doc.setFontSize(7);
     doc.text(niv, W-20, y2+20, {align:'right'});
-
-    y2 += rowH;
+    y2+=rowH;
   }
+  sf(...NAVY); doc.rect(0,H-14,W,14,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); st(...IVORY);
+  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  2/3', W/2, H-5, {align:'center'});
+  doc.link(10,H-14,W-20,10,{url:CALENDLY});
 
-  // Footer page 2
-  setFill(...NAVY_RGB); doc.rect(0,H-14,W,14,'F');
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(7);
-  setTxt(...IVORY_RGB);
-  doc.text('Ivory Consulting  ·  Nadjé Guehi  ·  Guadeloupe  ·  calendly.com/guehinadje-ivoryconsulting/audit  |  2/3', W/2, H-5, {align:'center'});
-  doc.link(10, H-14, W-20, 10, {url: CALENDLY});
-
-  // ══ PAGE 3 — PLAN D'ACTION + CTA ══
+  // PAGE 3 — PLAN D'ACTION
   doc.addPage();
-  setFill(...NAVY_RGB); doc.rect(0,0,W,H,'F');
-  setFill(...GOLD_RGB); doc.rect(0,0,2,H,'F');
-  setStroke(...GOLD_RGB); doc.setLineWidth(0.3);
-  doc.circle(W-15,15,30,'S');
-  doc.circle(15,H-15,25,'S');
-
-  // Header
-  setFill(...NAVY2_RGB); doc.rect(0,0,W,18,'F');
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(12);
-  setTxt(...IVORY_RGB);
-  doc.text('TON PLAN D\'ACTION PRIORITAIRE', 14, 12);
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(8);
-  setTxt(...GOLD_RGB);
-  doc.text('Personnalise · Ivory Consulting', W-8, 12, {align:'right'});
-
-  setFill(...GOLD_RGB); doc.rect(W/2-16,20,32,0.5,'F');
-
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(8);
-  setTxt(...IVORY_RGB);
+  sf(...NAVY); doc.rect(0,0,W,H,'F');
+  sf(...GOLD); doc.rect(0,0,2,H,'F');
+  ss(...GOLD); doc.setLineWidth(0.3);
+  doc.circle(W-15,15,30,'S'); doc.circle(15,H-15,25,'S');
+  sf(...NAVY2); doc.rect(0,0,W,18,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...IVORY);
+  doc.text("TON PLAN D'ACTION PRIORITAIRE", 14, 12);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...GOLD);
+  doc.text('Personalise · Ivory Consulting', W-8, 12, {align:'right'});
+  sf(...GOLD); doc.rect(W/2-16,20,32,0.5,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...IVORY);
   doc.text('Bases sur ton score de '+sc+'/100, voici les actions a lancer en priorite.', W/2, 28, {align:'center'});
-
-  // Actions
-  var priorities = [];
+  var priorities=[];
   for(var j=0;j<8;j++){ if((ans[j]||0)<8) priorities.push(j); }
   if(priorities.length===0){ priorities=[0,1,2,3,4,5]; }
-
-  var y3 = 38;
-  var actH = 26;
+  var y3=38, actH=26;
   priorities.slice(0,6).forEach(function(idx,rank){
-    setFill(...NAVY2_RGB);
-    doc.roundedRect(10,y3,W-20,actH,3,3,'F');
-    setStroke(...GOLD_RGB); doc.setLineWidth(0.5);
-    doc.roundedRect(10,y3,W-20,actH,3,3,'S');
-
-    // Badge
-    setFill(...GOLD_RGB);
-    doc.roundedRect(14,y3+6,8,8,2,2,'F');
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(7);
-    setTxt(...NAVY_RGB);
+    sf(...NAVY2); doc.roundedRect(10,y3,W-20,actH,3,3,'F');
+    ss(...GOLD); doc.setLineWidth(0.5); doc.roundedRect(10,y3,W-20,actH,3,3,'S');
+    sf(...GOLD); doc.roundedRect(14,y3+6,8,8,2,2,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); st(...NAVY);
     doc.text(String(rank+1),18,y3+12,{align:'center'});
-
-    // Titre critère
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(8);
-    setTxt(...GOLD_RGB);
-    doc.text(LABELS_LONG[idx], 26, y3+10);
-
-    // Action
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(8);
-    setTxt(...IVORY_RGB);
-    var lines = doc.splitTextToSize(ACTIONS[idx], W-44);
-    doc.text(lines[0], 26, y3+19);
-    if(lines[1]) doc.text(lines[1].substring(0,70), 26, y3+24);
-
-    y3 += actH + 4;
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); st(...GOLD);
+    doc.text(LABELS_LONG[idx],26,y3+10);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...IVORY);
+    var lines=doc.splitTextToSize(ACTIONS[idx],W-44);
+    doc.text(lines[0],26,y3+19);
+    if(lines[1]) doc.text(lines[1].substring(0,70),26,y3+24);
+    y3+=actH+4;
   });
-
-  // CTA Calendly — lien cliquable
-  var ctaY = y3 + 4;
-  var ctaH = 28;
-  setFill(...GOLD_RGB); doc.roundedRect(10,ctaY,W-20,ctaH,5,5,'F');
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(12);
-  setTxt(...NAVY_RGB);
+  var ctaY=y3+4, ctaH=28;
+  sf(...GOLD); doc.roundedRect(10,ctaY,W-20,ctaH,5,5,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...NAVY);
   doc.text('Reserve ton audit complet offert - 25 min', W/2, ctaY+11, {align:'center'});
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(9);
-  doc.setTextColor(13,27,75);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
   doc.text('On analyse ton score et on construit ton plan sur mesure.', W/2, ctaY+19, {align:'center'});
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(8);
-  doc.text(CALENDLY, W/2, ctaY+26, {align:'center'});
-  // Lien cliquable
-  doc.link(10, ctaY, W-20, ctaH, {url: CALENDLY});
+  doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('calendly.com/guehinadje-ivoryconsulting/audit', W/2, ctaY+26, {align:'center'});
+  doc.link(10,ctaY,W-20,ctaH,{url:CALENDLY});
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); st(...IVORY);
+  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  3/3', W/2, H-8, {align:'center'});
+  doc.link(10,H-14,W-20,10,{url:CALENDLY});
 
-  // Footer page 3
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(7);
-  setTxt(...IVORY_RGB);
-  doc.text('Ivory Consulting  ·  Nadjé Guehi  ·  Guadeloupe  ·  calendly.com/guehinadje-ivoryconsulting/audit  |  3/3', W/2, H-8, {align:'center'});
-  // Lien Calendly dans le footer aussi
-  doc.link(10, H-14, W-20, 10, {url: CALENDLY});
-
-  var prenom2 = prenom.replace(/[^a-zA-Z0-9]/g,'_');
-  doc.save('Plan_Action_Digital_Ivory_Consulting_'+prenom2+'.pdf');
-  track('pdf_downloaded',{score:sc, prenom:prenom});
+  doc.save('Plan_Action_Digital_Ivory_'+prenom.replace(/[^a-zA-Z0-9]/g,'_')+'.pdf');
+  track('pdf_downloaded',{score:sc});
 }
 </script>
 </body>
