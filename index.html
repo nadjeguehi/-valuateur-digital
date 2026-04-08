@@ -293,7 +293,7 @@ footer a{color:var(--gold);text-decoration:none}
 // ════════════════════════════════════════════════════
 // CONFIG — NE PAS MODIFIER
 // ════════════════════════════════════════════════════
-const MAKE_WEBHOOK = 'https://hook.us2.make.com/dcjtp7iu3rk78lxloqgps8gwshuu0wer';
+const MAKE_WEBHOOK = 'https://hook.us2.make.com/ye0y9bpip3lycoi1ld82685jctsma7sh';
 const CALENDLY    = 'https://calendly.com/guehinadje-ivoryconsulting/audit';
 
 // ════════════════════════════════════════════════════
@@ -410,30 +410,29 @@ async function sendLead(){
   leadActivite = activite;
 
   document.getElementById('btn-send').disabled = true;
-  document.getElementById('btn-send').textContent = 'Envoi en cours…';
+  
 
   track('lead_sent', { score: sc, source: 'quiz-e-reputation' });
 
+  // ── Envoi URLSearchParams vers Make Webhook ──
+  // URLSearchParams = requête simple CORS, fonctionne sans preflight
+  var payload = new URLSearchParams({
+    prenom:   prenom   || 'Non renseigné',
+    email:    email,
+    activite: activite || 'Non renseigné',
+    score:    String(sc),
+    reponses: ans.join(','),
+    source:   'quiz-e-reputation',
+    timestamp: String(Date.now()),
+    consentement_rgpd: 'Oui'
+  });
   try {
-    // ── Envoi JSON vers Make Webhook ──
     await fetch(MAKE_WEBHOOK, {
       method: 'POST',
-      mode: 'no-cors',          // Make webhook accepte no-cors
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        prenom:   prenom   || 'Non renseigné',
-        email:    email,
-        activite: activite || 'Non renseigné',
-        score:    sc,
-        reponses: ans.join(','),
-        source:   'quiz-e-reputation',
-        timestamp: Date.now(),
-        consentement_rgpd: 'Oui — ' + new Date().toISOString()
-      })
+      body: payload
     });
   } catch(e) {
-    // no-cors ne renvoie pas d'erreur, on affiche toujours le succès
-    console.log('Webhook sent');
+    console.log('Webhook fired');
   }
 
   // Afficher succès dans tous les cas
@@ -584,3 +583,4 @@ function downloadPDF(){
 </script>
 </body>
 </html>
+
