@@ -3,474 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Évaluateur Digital — Ivory Consulting</title>
-<meta name="description" content="Teste ta maturité digitale en 2 minutes. Score + plan d'action gratuit.">
+<title>Évaluateur de Maturité Digitale — Ivory Consulting</title>
+<meta name="description" content="Teste ta maturité digitale en 2 minutes. Score + plan d'action PDF gratuit. Par Ivory Consulting, Guadeloupe.">
 
-<!-- GA4 -->
+<!-- Google Analytics 4 — G-X44G3BE35R -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X44G3BE35R"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-X44G3BE35R');
-  function track(n,p){ try{ gtag('event',n,p||{}); }catch(e){} }
+  gtag('config', 'G-X44G3BE35R', { send_page_view: true });
+  function track(n, p) { gtag('event', n, p || {}); }
 </script>
 
-<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-/* ── Reset complet pour éviter tout conflit ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy:#0D1B4B; --navy2:#1A2D6B; --gold:#C9A435; --gold2:#E0B84A; --ivory:#F7F3E8; --ok:#2ecc71; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--navy);min-height:100vh;color:var(--ivory);line-height:1.6}
 
-:root {
-  --navy:  #0D1B4B;
-  --navy2: #1A2D6B;
-  --gold:  #C9A435;
-  --gold2: #E0B84A;
-  --ivory: #F7F3E8;
-  --green: #2ecc71;
-}
+.header{background:var(--navy);border-bottom:1px solid rgba(201,164,53,.25);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.header img{height:46px;width:auto}
+.header-tag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.85}
 
-html, body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: var(--navy);
-  color: var(--ivory);
-  line-height: 1.6;
-  min-height: 100vh;
-}
+.container{max-width:760px;margin:0 auto;padding:32px 20px 60px}
 
-/* ── Header ── */
-.header {
-  background: var(--navy);
-  border-bottom: 2px solid rgba(201,164,53,.3);
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-.header img { height: 44px; }
-.header-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.hero{text-align:center;padding:40px 0 32px;border-bottom:1px solid rgba(201,164,53,.15);margin-bottom:32px}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:.85}
+.hero h1{font-size:clamp(26px,5vw,42px);font-weight:800;color:var(--ivory);line-height:1.2;margin-bottom:14px}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:16px;color:var(--ivory);opacity:.7;max-width:520px;margin:0 auto 18px}
+.hero-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-pill{background:var(--navy2);border:1px solid rgba(201,164,53,.3);border-radius:20px;padding:6px 16px;font-size:12px;color:var(--gold2)}
 
-/* ── Container ── */
-.wrap { max-width: 720px; margin: 0 auto; padding: 32px 16px 80px; }
+.progress-wrap{margin-bottom:24px;display:none}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;opacity:.5;margin-bottom:6px}
+.progress-bar{height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s ease;width:0%}
 
-/* ── Hero ── */
-.hero { text-align: center; padding: 36px 0 28px; border-bottom: 1px solid rgba(201,164,53,.15); margin-bottom: 28px; }
-.hero-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.hero h1 { font-size: clamp(24px,5vw,40px); font-weight: 800; margin-bottom: 12px; }
-.hero h1 em { color: var(--gold); font-style: normal; }
-.hero p { font-size: 15px; opacity: .7; max-width: 500px; margin: 0 auto 16px; }
-.pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-.pill { background: var(--navy2); border: 1px solid rgba(201,164,53,.3); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--gold2); }
+.q-card{background:var(--navy2);border:1px solid rgba(201,164,53,.2);border-radius:16px;padding:28px;margin-bottom:20px;display:none}
+.q-card.active{display:block}
+.q-num{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:10px}
+.q-text{font-size:19px;font-weight:700;color:var(--ivory);margin-bottom:20px;line-height:1.35}
+.q-opts{display:flex;flex-direction:column;gap:10px}
+.q-opt{display:flex;align-items:center;gap:14px;background:rgba(13,27,75,.6);border:1.5px solid rgba(201,164,53,.2);border-radius:10px;padding:14px 18px;cursor:pointer;transition:all .2s;font-size:15px;color:var(--ivory)}
+.q-opt:hover{border-color:var(--gold);background:rgba(201,164,53,.08);transform:translateX(4px)}
+.q-opt.sel{border-color:var(--gold);background:rgba(201,164,53,.15);color:var(--gold2)}
+.circle{width:22px;height:22px;border-radius:50%;border:2px solid rgba(201,164,53,.4);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.q-opt.sel .circle{background:var(--gold);border-color:var(--gold);color:var(--navy)}
 
-/* ── Progress ── */
-.prog-wrap { margin-bottom: 20px; display: none; }
-.prog-row { display: flex; justify-content: space-between; font-size: 12px; opacity: .5; margin-bottom: 5px; }
-.prog-bar { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; }
-.prog-fill { height: 100%; background: var(--gold); border-radius: 2px; width: 0; transition: width .4s; }
+.nav{display:flex;gap:12px;margin-top:22px}
+.btn{padding:13px 28px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.btn-back{background:transparent;border:1.5px solid rgba(201,164,53,.3);color:var(--ivory);flex:1;display:none}
+.btn-back:hover{border-color:var(--gold)}
+.btn-next{background:var(--gold);color:var(--navy);flex:2}
+.btn-next:hover:not(:disabled){background:var(--gold2);transform:scale(1.02)}
+.btn-next:disabled{opacity:.35;cursor:default}
 
-/* ── Questions ── */
-.q-card { background: var(--navy2); border: 1px solid rgba(201,164,53,.2); border-radius: 14px; padding: 26px; margin-bottom: 18px; display: none; }
-.q-card.on { display: block; }
-.q-n { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: .7; margin-bottom: 8px; }
-.q-t { font-size: 18px; font-weight: 700; margin-bottom: 18px; line-height: 1.35; }
-.opts { display: flex; flex-direction: column; gap: 9px; }
-.opt {
-  display: flex; align-items: center; gap: 12px;
-  background: rgba(13,27,75,.6);
-  border: 1.5px solid rgba(201,164,53,.2);
-  border-radius: 10px;
-  padding: 13px 16px;
-  cursor: pointer;
-  transition: all .18s;
-  font-size: 15px;
-  user-select: none;
-}
-.opt:hover { border-color: var(--gold); background: rgba(201,164,53,.08); transform: translateX(3px); }
-.opt.sel { border-color: var(--gold); background: rgba(201,164,53,.15); color: var(--gold2); }
-.dot {
-  width: 22px; height: 22px; border-radius: 50%;
-  border: 2px solid rgba(201,164,53,.4);
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700;
-}
-.opt.sel .dot { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+#result{display:none}
+.score-wrap{text-align:center;padding:36px 0 24px}
+.score-ring{width:150px;height:150px;border-radius:50%;border:3px solid rgba(201,164,53,.3);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;flex-direction:column;background:rgba(201,164,53,.07);position:relative}
+.score-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(201,164,53,.12)}
+.score-n{font-size:52px;font-weight:800;color:var(--gold);line-height:1}
+.score-t{font-size:13px;opacity:.5}
+.score-label{font-size:22px;font-weight:700;margin-bottom:8px}
+.score-sub{font-size:15px;opacity:.65}
 
-/* ── Navigation ── */
-.nav { display: flex; gap: 10px; margin-top: 20px; }
-.btn { padding: 13px 24px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: all .18s; }
-.btn-b { background: transparent; border: 1.5px solid rgba(201,164,53,.35); color: var(--ivory); flex: 1; display: none; }
-.btn-b:hover { border-color: var(--gold); }
-.btn-n { background: var(--gold); color: var(--navy); flex: 2; }
-.btn-n:hover:not([disabled]) { background: var(--gold2); }
-.btn-n[disabled] { opacity: .35; cursor: not-allowed; }
+.blocks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+@media(max-width:520px){.blocks{grid-template-columns:1fr}}
+.block{background:var(--navy2);border:1px solid rgba(201,164,53,.2);border-radius:12px;padding:20px}
+.block h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.block ul{list-style:none}
+.block li{font-size:14px;opacity:.85;margin-bottom:8px;display:flex;gap:8px}
+.block li::before{content:'→';color:var(--gold);flex-shrink:0}
 
-/* ── Résultats ── */
-#result { display: none; }
-.score-center { text-align: center; padding: 32px 0 20px; }
-.ring {
-  width: 140px; height: 140px; border-radius: 50%;
-  border: 3px solid rgba(201,164,53,.3);
-  margin: 0 auto 16px;
-  display: flex; align-items: center; justify-content: center; flex-direction: column;
-  background: rgba(201,164,53,.07);
-}
-.ring-n { font-size: 50px; font-weight: 800; color: var(--gold); line-height: 1; }
-.ring-t { font-size: 12px; opacity: .5; }
-.score-lbl { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.score-sub { font-size: 14px; opacity: .65; }
+/* ── FORMULAIRE ── */
+.email-box{background:var(--navy2);border:1.5px solid var(--gold);border-radius:16px;padding:28px;margin:26px 0}
+.email-box h3{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--ivory)}
+.email-box h3 span{color:var(--gold)}
+.email-box>p{font-size:14px;opacity:.7;margin-bottom:18px;color:var(--ivory)}
+.fields{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.fields input[type=text],.fields input[type=email]{flex:1;min-width:190px;padding:13px 18px;background:rgba(13,27,75,.7);border:1.5px solid rgba(201,164,53,.3);border-radius:10px;color:var(--ivory);font-size:15px;outline:none;transition:border-color .2s}
+.fields input:focus{border-color:var(--gold)}
+.fields input::placeholder{color:rgba(247,243,232,.3)}
+.rgpd{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;margin-bottom:16px;background:rgba(13,27,75,.5);border:1px solid rgba(201,164,53,.15);border-radius:10px;font-size:13px;color:var(--ivory);opacity:.85;line-height:1.55}
+.rgpd input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--gold);cursor:pointer}
+.btn-send{width:100%;padding:15px;background:var(--gold);color:var(--navy);border:none;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-send:hover:not(:disabled){background:var(--gold2);transform:scale(1.01)}
+.btn-send:disabled{opacity:.35;cursor:default;transform:none}
+.send-ok{display:none;text-align:center;padding:18px;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);border-radius:12px;margin-top:12px;color:var(--ok);font-weight:600}
+.rgpd-note{font-size:11px;opacity:.38;text-align:center;margin-top:10px;line-height:1.5;color:var(--ivory)}
 
-.blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
-@media(max-width:500px){ .blocks{grid-template-columns:1fr} }
-.block { background: var(--navy2); border: 1px solid rgba(201,164,53,.2); border-radius: 12px; padding: 18px; }
-.block h4 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-.block ul { list-style: none; }
-.block li { font-size: 13px; opacity: .85; margin-bottom: 7px; display: flex; gap: 7px; }
-.block li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+.pdf-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:transparent;border:1.5px solid var(--gold);color:var(--gold);border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:14px}
+.pdf-btn:hover{background:rgba(201,164,53,.1)}
 
-/* ════════════════════════════════════════════
-   FORMULAIRE — INPUTS GARANTIS FONCTIONNELS
-   Pas de pointer-events block, pas d'overlay
-════════════════════════════════════════════ */
-.form-box {
-  background: var(--navy2);
-  border: 2px solid var(--gold);
-  border-radius: 16px;
-  padding: 28px 24px;
-  margin: 24px 0;
-  position: relative;   /* contexte de stacking propre */
-  z-index: 1;
-}
-.form-box h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
-.form-box h3 span { color: var(--gold); }
-.form-box .desc { font-size: 13px; opacity: .65; margin-bottom: 18px; }
+.cta-cal{display:block;background:var(--gold);border-radius:16px;padding:28px;text-align:center;margin:18px 0;text-decoration:none;transition:transform .2s}
+.cta-cal:hover{transform:scale(1.01)}
+.cta-cal h3{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.cta-cal p{font-size:15px;color:var(--navy);opacity:.75}
+.cta-cal .cta-link{font-size:13px;color:var(--navy);opacity:.6;margin-top:8px;display:block}
 
-/* ── Champs de saisie ── */
-.field-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
-
-/* Garantir que les inputs acceptent la saisie */
-input[type="text"],
-input[type="email"] {
-  -webkit-appearance: none;
-  appearance: none;
-  flex: 1;
-  min-width: 180px;
-  padding: 13px 16px;
-  background: rgba(10,20,60,.8);
-  border: 1.5px solid rgba(201,164,53,.35);
-  border-radius: 10px;
-  color: #F7F3E8;
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-  transition: border-color .2s;
-  cursor: text;
-  pointer-events: auto;  /* toujours cliquable */
-  position: relative;
-  z-index: 2;
-}
-input[type="text"]:focus,
-input[type="email"]:focus {
-  border-color: var(--gold);
-  background: rgba(15,28,75,.9);
-}
-input[type="text"]::placeholder,
-input[type="email"]::placeholder { color: rgba(247,243,232,.35); }
-
-/* ── Checkbox RGPD ── */
-.rgpd-row {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  background: rgba(10,20,60,.5);
-  border: 1px solid rgba(201,164,53,.15);
-  border-radius: 10px;
-  padding: 13px 14px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  line-height: 1.55;
-}
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-top: 1px;
-  accent-color: var(--gold);
-  cursor: pointer;
-  pointer-events: auto;
-  position: relative;
-  z-index: 2;
-}
-
-/* ── Bouton envoi ── */
-.btn-send {
-  width: 100%;
-  padding: 15px;
-  background: var(--gold);
-  color: var(--navy);
-  border: none;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all .2s;
-  pointer-events: auto;
-  position: relative;
-  z-index: 2;
-}
-.btn-send:hover:not([disabled]) { background: var(--gold2); transform: scale(1.01); }
-.btn-send[disabled] { opacity: .35; cursor: not-allowed; transform: none; }
-
-.msg-ok {
-  display: none;
-  text-align: center;
-  padding: 16px;
-  background: rgba(46,204,113,.12);
-  border: 1px solid rgba(46,204,113,.35);
-  border-radius: 12px;
-  margin-top: 12px;
-  color: var(--green);
-  font-weight: 600;
-}
-.rgpd-note { font-size: 11px; opacity: .35; text-align: center; margin-top: 10px; line-height: 1.5; }
-
-/* ── PDF button ── */
-.btn-pdf {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; padding: 13px;
-  background: transparent;
-  border: 1.5px solid var(--gold);
-  color: var(--gold);
-  border-radius: 50px;
-  font-size: 14px; font-weight: 700;
-  cursor: pointer;
-  transition: all .2s;
-  margin-top: 12px;
-}
-.btn-pdf:hover { background: rgba(201,164,53,.1); }
-
-/* ── CTA Calendly ── */
-.cta {
-  display: block;
-  background: var(--gold);
-  border-radius: 14px;
-  padding: 26px;
-  text-align: center;
-  margin: 18px 0;
-  text-decoration: none;
-  transition: transform .18s;
-}
-.cta:hover { transform: scale(1.01); }
-.cta h3 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
-.cta p { font-size: 14px; color: var(--navy); opacity: .75; }
-.cta small { font-size: 12px; color: var(--navy); opacity: .55; display: block; margin-top: 6px; }
-
-footer { text-align: center; padding: 24px; font-size: 11px; opacity: .3; border-top: 1px solid rgba(201,164,53,.1); margin-top: 40px; }
-footer a { color: var(--gold); }
+footer{text-align:center;padding:24px;font-size:11px;opacity:.35;border-top:1px solid rgba(201,164,53,.1);margin-top:40px}
+footer a{color:var(--gold);text-decoration:none}
 </style>
 </head>
 <body>
 
-<header class="header">
+<div class="header">
   <img src="https://i.imgur.com/Tcp9aJQ.png" alt="Ivory Consulting" onerror="this.style.display='none'">
   <div class="header-tag">Évaluateur Digital · Ivory Consulting</div>
-</header>
+</div>
 
-<div class="wrap">
+<div class="container">
 
-  <!-- HERO -->
   <div class="hero" id="hero">
-    <div class="hero-tag">Outil gratuit · 2 minutes · Résultat immédiat</div>
-    <h1>Ton business est-il<br><em>visible en ligne ?</em></h1>
-    <p>Obtiens ton score de maturité digitale + ton plan d'action personnalisé.</p>
-    <div class="pills">
-      <span class="pill">📍 Google My Business</span>
-      <span class="pill">⭐ E-Réputation</span>
-      <span class="pill">📲 Réseaux sociaux</span>
+    <div class="hero-eyebrow">Outil gratuit · Résultat immédiat · 2 minutes</div>
+    <h1>Ton business est-il<br><span>visible en ligne ?</span></h1>
+    <p>Obtiens ton score de maturité digitale et ton plan d'action PDF personnalisé, gratuitement.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">📍 Google My Business</span>
+      <span class="hero-pill">⭐ E-Réputation</span>
+      <span class="hero-pill">📲 Présence digitale</span>
     </div>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="prog-wrap" id="prog">
-    <div class="prog-row"><span id="ptxt">Question 1 / 8</span><span id="ppct">0%</span></div>
-    <div class="prog-bar"><div class="prog-fill" id="pfill"></div></div>
+  <div class="progress-wrap" id="prog">
+    <div class="progress-label"><span id="prog-txt">Question 1 / 8</span><span id="prog-pct">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
   </div>
 
-  <!-- QUIZ -->
   <div id="quiz">
-
-    <div class="q-card on" data-q="0">
-      <div class="q-n">Question 1 / 8</div>
-      <div class="q-t">Ta fiche Google My Business (GMB) est-elle créée et vérifiée ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Je n'en ai pas / je ne sais pas ce que c'est</div>
-        <div class="opt" data-v="5"><span class="dot">B</span>Elle existe mais elle n'est pas à jour</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>Elle est complète mais je la gère peu</div>
-        <div class="opt" data-v="13"><span class="dot">D</span>Complète, à jour, avec photos et horaires récents</div>
+    <div class="q-card active" data-q="0">
+      <div class="q-num">Question 1 / 8</div>
+      <div class="q-text">Ta fiche Google My Business (GMB) est-elle créée et vérifiée ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Je n'en ai pas / je ne sais pas ce que c'est</div>
+        <div class="q-opt" data-v="5"><span class="circle">B</span>Elle existe mais elle n'est pas à jour</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Elle est complète mais je la gère peu</div>
+        <div class="q-opt" data-v="13"><span class="circle">D</span>Complète, à jour, avec photos et horaires récents</div>
       </div>
     </div>
-
     <div class="q-card" data-q="1">
-      <div class="q-n">Question 2 / 8</div>
-      <div class="q-t">Combien d'avis Google as-tu sur ta fiche ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Moins de 5 avis</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>Entre 5 et 20 avis</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>Entre 20 et 50 avis</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>Plus de 50 avis, avec réponses régulières</div>
+      <div class="q-num">Question 2 / 8</div>
+      <div class="q-text">Combien d'avis Google as-tu sur ta fiche ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Moins de 5 avis</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Entre 5 et 20 avis</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Entre 20 et 50 avis</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Plus de 50 avis, avec réponses régulières</div>
       </div>
     </div>
-
     <div class="q-card" data-q="2">
-      <div class="q-n">Question 3 / 8</div>
-      <div class="q-t">As-tu un site web ou une page de présentation en ligne ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Non, aucune présence web</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>Une page Facebook ou un lien bio seulement</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>Un site web, mais pas mis à jour régulièrement</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>Un site optimisé, mobile-friendly, avec formulaire de contact</div>
+      <div class="q-num">Question 3 / 8</div>
+      <div class="q-text">As-tu un site web ou une page de présentation en ligne ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, aucune présence web</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Une page Facebook ou un lien bio seulement</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Un site web, mais pas mis à jour régulièrement</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Un site optimisé, mobile-friendly, avec formulaire de contact</div>
       </div>
     </div>
-
     <div class="q-card" data-q="3">
-      <div class="q-n">Question 4 / 8</div>
-      <div class="q-t">Publies-tu du contenu sur les réseaux sociaux ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Jamais ou presque jamais</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>Quelques fois par mois, sans régularité</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>1 à 2 fois par semaine</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>Plusieurs fois par semaine avec une stratégie définie</div>
+      <div class="q-num">Question 4 / 8</div>
+      <div class="q-text">Publies-tu du contenu sur les réseaux sociaux ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Jamais ou presque jamais</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Quelques fois par mois, sans régularité</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>1 à 2 fois par semaine</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Plusieurs fois par semaine avec une stratégie définie</div>
       </div>
     </div>
-
     <div class="q-card" data-q="4">
-      <div class="q-n">Question 5 / 8</div>
-      <div class="q-t">Est-ce que tu réponds aux avis négatifs sur Google ou les réseaux ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Non, je ne sais pas comment faire</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>Rarement, seulement quand c'est très négatif</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>Souvent, mais sans méthode précise</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>Systématiquement, avec un message professionnel adapté</div>
+      <div class="q-num">Question 5 / 8</div>
+      <div class="q-text">Est-ce que tu réponds aux avis négatifs sur Google ou les réseaux ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, je ne sais pas comment faire</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Rarement, seulement quand c'est très négatif</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Souvent, mais sans méthode précise</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Systématiquement, avec un message professionnel adapté</div>
       </div>
     </div>
-
     <div class="q-card" data-q="5">
-      <div class="q-n">Question 6 / 8</div>
-      <div class="q-t">As-tu un moyen de collecter les avis clients automatiquement ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Non, je demande verbalement parfois</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>J'envoie un lien par WhatsApp ou SMS manuellement</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>J'ai un QR code affiché en boutique</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>J'ai un système automatisé (NFC, email auto, totem…)</div>
+      <div class="q-num">Question 6 / 8</div>
+      <div class="q-text">As-tu un moyen de collecter les avis clients automatiquement ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, je demande verbalement parfois</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>J'envoie un lien par WhatsApp ou SMS manuellement</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>J'ai un QR code affiché en boutique</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>J'ai un système automatisé (NFC, email auto, totem…)</div>
       </div>
     </div>
-
     <div class="q-card" data-q="6">
-      <div class="q-n">Question 7 / 8</div>
-      <div class="q-t">Tes clients potentiels te trouvent-ils facilement sur Google en Guadeloupe ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Je n'apparais pas du tout</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>Uniquement si on tape mon nom exact</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>Je suis visible mais pas en première page</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>Je suis en première page pour mes mots-clés locaux</div>
+      <div class="q-num">Question 7 / 8</div>
+      <div class="q-text">Tes clients potentiels te trouvent-ils facilement sur Google en Guadeloupe ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Je n'apparais pas du tout</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>Uniquement si on tape mon nom exact</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>Je suis visible mais pas en première page</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Je suis en première page pour mes mots-clés locaux</div>
       </div>
     </div>
-
     <div class="q-card" data-q="7">
-      <div class="q-n">Question 8 / 8</div>
-      <div class="q-t">As-tu une stratégie digitale définie avec des objectifs mesurables ?</div>
-      <div class="opts">
-        <div class="opt" data-v="0"><span class="dot">A</span>Non, je fais au feeling</div>
-        <div class="opt" data-v="4"><span class="dot">B</span>J'ai quelques idées mais rien de formalisé</div>
-        <div class="opt" data-v="8"><span class="dot">C</span>J'ai un plan mais je ne mesure pas les résultats</div>
-        <div class="opt" data-v="12"><span class="dot">D</span>Oui : objectifs, KPIs, plan d'action trimestriel</div>
+      <div class="q-num">Question 8 / 8</div>
+      <div class="q-text">As-tu une stratégie digitale définie avec des objectifs mesurables ?</div>
+      <div class="q-opts">
+        <div class="q-opt" data-v="0"><span class="circle">A</span>Non, je fais au feeling</div>
+        <div class="q-opt" data-v="4"><span class="circle">B</span>J'ai quelques idées mais rien de formalisé</div>
+        <div class="q-opt" data-v="8"><span class="circle">C</span>J'ai un plan mais je ne mesure pas les résultats</div>
+        <div class="q-opt" data-v="12"><span class="circle">D</span>Oui : objectifs, KPIs, plan d'action trimestriel</div>
       </div>
     </div>
-
     <div class="nav">
-      <button class="btn btn-b" id="bb" onclick="prev()">← Retour</button>
-      <button class="btn btn-n" id="bn" onclick="next()" disabled>Continuer →</button>
+      <button class="btn btn-back" id="btn-back" onclick="prev()">← Retour</button>
+      <button class="btn btn-next" id="btn-next" onclick="next()" disabled>Continuer →</button>
     </div>
-  </div><!-- /quiz -->
+  </div>
 
-  <!-- ════════ RÉSULTATS ════════ -->
+  <!-- ════════════ RÉSULTATS ════════════ -->
   <div id="result">
 
-    <div class="score-center">
-      <div class="ring">
-        <div class="ring-n" id="sn">0</div>
-        <div class="ring-t">/ 100</div>
+    <div class="score-wrap">
+      <div class="score-ring">
+        <div class="score-n" id="snum">0</div>
+        <div class="score-t">/ 100</div>
       </div>
-      <div class="score-lbl" id="sl"></div>
-      <div class="score-sub" id="ss"></div>
+      <div class="score-label" id="slabel"></div>
+      <div class="score-sub" id="ssub"></div>
     </div>
 
-    <p style="text-align:center;font-size:13px;opacity:.7;margin-bottom:16px;">
-      💡 Télécharge ton plan d'action PDF ci-dessous · Le mail te confirme ton diagnostic.
+    <p style="margin-top:15px;font-size:14px;opacity:.8;text-align:center;">
+      💡 Ton plan détaillé est disponible immédiatement ci-dessous.<br>
+      Le mail contient un résumé + tes prochaines actions prioritaires.
     </p>
 
     <div class="blocks">
       <div class="block"><h4>✅ Points forts</h4><ul id="str"></ul></div>
-      <div class="block"><h4>🎯 Priorités</h4><ul id="act"></ul></div>
+      <div class="block"><h4>🎯 Priorités d'action</h4><ul id="act"></ul></div>
     </div>
 
-    <!-- ═══ FORMULAIRE CORRIGÉ ═══ -->
-    <div class="form-box">
+    <!-- ════ FORMULAIRE → MAKE WEBHOOK ════ -->
+    <div class="email-box">
       <h3>📩 Reçois ton plan d'action <span>par email</span></h3>
-      <p class="desc">Résumé + 3 actions prioritaires adaptées à ton activité en Guadeloupe. Gratuit.</p>
-
-      <div class="field-row">
-        <input type="text"  id="ip-prenom"   placeholder="Ton prénom *">
-        <input type="text"  id="ip-activite" placeholder="Ton secteur (restaurant, hôtel…)">
+      <p>Télécharge ton plan personnalisé immédiatement ci-dessous et reçois un résumé + conseils directement dans ta boîte mail.</p>
+      <div class="fields">
+        <input type="text"  id="f-prenom"   placeholder="Ton prénom *" maxlength="60">
+        <input type="text"  id="f-activite" placeholder="Ton secteur (restaurant, hôtel…)" maxlength="80">
       </div>
-      <div class="field-row">
-        <input type="email" id="ip-email" placeholder="ton@email.com *" oninput="chk()">
+      <div class="fields">
+        <input type="email" id="f-email" placeholder="ton@email.com *" maxlength="120" oninput="checkReady()">
       </div>
-
-      <div class="rgpd-row">
-        <input type="checkbox" id="ck-rgpd" onchange="chk()">
-        <label for="ck-rgpd" style="cursor:pointer;">
-          J'accepte l'utilisation de mes données pour recevoir mon plan d'action digital.
-          Désinscription possible à tout moment.
-        </label>
+      <div class="rgpd">
+        <input type="checkbox" id="cgdpr" onchange="checkReady()">
+        <label for="cgdpr">J'accepte l'utilisation de mes données pour recevoir mon plan d'action.</label>
       </div>
-
-      <button class="btn-send" id="bs" onclick="send()" disabled>
+      <button class="btn-send" id="btn-send" onclick="sendLead()" disabled>
         Recevoir mon analyse →
       </button>
-
-      <div class="msg-ok" id="msg-ok">
-        ✅ C'est parti ! Vérifie ta boîte mail (et tes spams).
+      <div class="send-ok" id="send-ok">
+        ✅ Plan envoyé. Vérifie tes emails (et tes spams).
       </div>
-
-      <div class="rgpd-note">
-        🔒 Données confidentielles · RGPD · Ivory Consulting Guadeloupe · Aucune revente
-      </div>
+      <div class="rgpd-note">🔒 RGPD · Ivory Consulting · Guadeloupe · Aucune revente · Désinscription en 1 clic</div>
     </div>
 
-    <!-- PDF -->
-    <button class="btn-pdf" onclick="dlPDF()">
-      📄 Télécharger mon plan d'action PDF
+    <!-- PDF download -->
+    <button class="pdf-btn" onclick="downloadPDF()">
+      📄 Télécharger mon plan d'action PDF personnalisé
     </button>
 
-    <!-- Calendly -->
+    <!-- CTA Calendly -->
     <a href="https://calendly.com/guehinadje-ivoryconsulting/audit"
-       class="cta"
+       class="cta-cal"
        onclick="track('cta_calendly_click',{score:sc})"
-       target="_blank" rel="noopener">
-      <h3>🗓 Réserve ton audit offert — 25 min</h3>
-      <p>On analyse ton score et on construit ton plan d'action sur mesure.</p>
-      <small>→ calendly.com/guehinadje-ivoryconsulting/audit</small>
+       target="_blank" rel="noopener noreferrer">
+      <h3>🗓 Réserve ton audit complet offert — 25 min</h3>
+      <p>On analyse ton score ensemble et on construit ton plan d'action sur mesure.</p>
+      <span class="cta-link">→ calendly.com/guehinadje-ivoryconsulting/audit</span>
     </a>
 
   </div><!-- /result -->
-
-</div><!-- /wrap -->
+</div><!-- /container -->
 
 <footer>
   © 2026 Ivory Consulting · Nadjé Guehi · Guadeloupe ·
@@ -478,284 +290,296 @@ footer a { color: var(--gold); }
 </footer>
 
 <script>
-'use strict';
+// ════════════════════════════════════════════════════
+// CONFIG — NE PAS MODIFIER
+// ════════════════════════════════════════════════════
+const MAKE_WEBHOOK = 'https://hook.us2.make.com/ye0y9bpip3lycoi1ld82685jctsma7sh';
+const CALENDLY    = 'https://calendly.com/guehinadje-ivoryconsulting/audit';
 
-// ── Config ──
-var WEBHOOK  = 'https://hook.us2.make.com/ruwkngt46utyvzbm7rdn13rwk13y4bur';
-var CALENDLY = 'https://calendly.com/guehinadje-ivoryconsulting/audit';
+// ════════════════════════════════════════════════════
+// QUIZ
+// ════════════════════════════════════════════════════
+const TOTAL = 8;
+let cur = 0, ans = new Array(TOTAL).fill(null), sc = 0;
+let leadPrenom = '', leadActivite = '';
 
-// ── Données ──
-var TOTAL = 8;
-var cur = 0;
-var ans = new Array(TOTAL).fill(null);
-var sc  = 0;
-var lpn = '', lac = '';
-
-var LBL  = ['Fiche GMB','Avis Google','Site web','Réseaux sociaux','Gestion avis','Collecte avis','Référencement local','Stratégie digitale'];
-var LBLL = ['Fiche Google My Business','Avis Google','Site web','Réseaux sociaux','Gestion avis négatifs','Collecte avis auto','Référencement local','Stratégie digitale'];
-var ACT  = [
-  'Créer et vérifier ta fiche GMB sur business.google.com — gratuit.',
-  'Déployer un QR code ou NFC pour multiplier tes avis Google.',
+const LABELS = ['Fiche GMB','Avis Google','Site web','Réseaux sociaux','Gestion avis','Collecte avis','Référencement local','Stratégie digitale'];
+const LABELS_LONG = ['Fiche Google My Business','Avis Google','Site web','Réseaux sociaux','Gestion des avis négatifs','Collecte avis automatique','Référencement local','Stratégie digitale'];
+const ACTIONS = [
+  'Créer et vérifier ta fiche GMB sur business.google.com — gratuit et immédiat.',
+  'Déployer un système NFC ou QR code pour multiplier par 5 tes avis Google.',
   'Lancer un site mobile-friendly avec formulaire de contact.',
-  'Démarrer un calendrier éditorial 2 posts/semaine LinkedIn & Facebook.',
-  'Répondre à TOUS les avis (positifs ET négatifs) dans les 24h.',
-  'Adopter un système automatisé (NFC, email auto) pour les avis.',
-  'Optimiser ta fiche GMB avec mots-clés locaux + posts hebdos.',
-  'Définir 3 KPIs : visiteurs/mois, avis reçus/mois, leads/mois.',
+  'Démarrer un calendrier éditorial Lundi + Jeudi sur LinkedIn & Facebook.',
+  'Répondre à tous les avis (positifs ET négatifs) dans les 24h.',
+  'Adopter un système automatisé (NFC, email, totem) pour collecter les avis.',
+  'Optimiser ta fiche GMB avec mots-clés locaux et posts Google hebdomadaires.',
+  'Définir 3 KPIs à suivre : visiteurs/mois, avis reçus/mois, leads/mois.',
 ];
-var MAX = 13+12+12+12+12+12+12+12;
-var MXV = [13,12,12,12,12,12,12,12];
+const MAX = 13+12+12+12+12+12+12+12;
+const MAX_VALS = [13,12,12,12,12,12,12,12];
 
-track('evaluateur_open', {ref: document.referrer||'direct'});
+track('evaluateur_open', { referrer: document.referrer || 'direct' });
 
-// ── Sélection réponses ──
-document.querySelectorAll('.opt').forEach(function(o){
-  o.addEventListener('click', function(){
-    var c = this.closest('.q-card');
-    c.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel'); });
+document.querySelectorAll('.q-opt').forEach(function(opt){
+  opt.addEventListener('click', function(){
+    var card = this.closest('.q-card');
+    card.querySelectorAll('.q-opt').forEach(function(o){ o.classList.remove('sel'); });
     this.classList.add('sel');
-    var qi = parseInt(c.dataset.q);
+    var qi = parseInt(card.dataset.q);
     ans[qi] = parseInt(this.dataset.v);
-    document.getElementById('bn').disabled = false;
-    track('q_ans', {q: qi+1, v: ans[qi]});
+    document.getElementById('btn-next').disabled = false;
+    track('question_answered', { question: qi+1, value: ans[qi] });
   });
 });
 
-function upProg(){
-  var p = Math.round((cur/TOTAL)*100);
-  document.getElementById('pfill').style.width = p+'%';
-  document.getElementById('ptxt').textContent = 'Question '+(cur+1)+' / '+TOTAL;
-  document.getElementById('ppct').textContent = p+'%';
+function updateProg(){
+  var pct = Math.round((cur/TOTAL)*100);
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-txt').textContent = 'Question '+(cur+1)+' / '+TOTAL;
+  document.getElementById('prog-pct').textContent = pct+'%';
 }
-
 function next(){
   if(ans[cur]===null) return;
-  if(cur===TOTAL-1){ showRes(); return; }
-  document.querySelectorAll('.q-card')[cur].classList.remove('on');
+  if(cur===TOTAL-1){ showResult(); return; }
+  document.querySelectorAll('.q-card')[cur].classList.remove('active');
   cur++;
-  document.querySelectorAll('.q-card')[cur].classList.add('on');
-  document.getElementById('bb').style.display = 'block';
-  document.getElementById('bn').disabled = (ans[cur]===null);
-  if(cur===TOTAL-1) document.getElementById('bn').textContent = 'Voir mon score →';
-  document.getElementById('prog').style.display = 'block';
-  upProg();
+  document.querySelectorAll('.q-card')[cur].classList.add('active');
+  document.getElementById('btn-back').style.display='block';
+  document.getElementById('btn-next').disabled = ans[cur]===null;
+  if(cur===TOTAL-1) document.getElementById('btn-next').textContent='Voir mon score →';
+  document.getElementById('prog').style.display='block';
+  updateProg();
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function prev(){
   if(cur===0) return;
-  document.querySelectorAll('.q-card')[cur].classList.remove('on');
+  document.querySelectorAll('.q-card')[cur].classList.remove('active');
   cur--;
-  document.querySelectorAll('.q-card')[cur].classList.add('on');
-  document.getElementById('bn').disabled = false;
-  document.getElementById('bn').textContent = 'Continuer →';
-  if(cur===0) document.getElementById('bb').style.display = 'none';
-  upProg();
+  document.querySelectorAll('.q-card')[cur].classList.add('active');
+  document.getElementById('btn-next').disabled=false;
+  document.getElementById('btn-next').textContent='Continuer →';
+  if(cur===0) document.getElementById('btn-back').style.display='none';
+  updateProg();
 }
 
-function showRes(){
-  var raw = ans.reduce(function(a,b){ return a+(b||0); },0);
+function showResult(){
+  var raw = ans.reduce(function(a,b){return a+(b||0);},0);
   sc = Math.round((raw/MAX)*100);
-  track('score_shown',{score:sc, ans:ans.join(',')});
+  track('score_displayed', { score: sc, answers: ans.join(',') });
 
-  document.getElementById('hero').style.display = 'none';
-  document.getElementById('quiz').style.display = 'none';
-  document.getElementById('prog').style.display = 'none';
-  document.getElementById('result').style.display = 'block';
+  document.getElementById('hero').style.display='none';
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('prog').style.display='none';
+  document.getElementById('result').style.display='block';
 
-  // Compte animé
-  var el=document.getElementById('sn'), c=0;
-  var iv=setInterval(function(){ c=Math.min(c+Math.ceil(sc/40),sc); el.textContent=c; if(c>=sc)clearInterval(iv); },28);
+  var el=document.getElementById('snum'), c2=0;
+  var iv=setInterval(function(){
+    c2=Math.min(c2+Math.ceil(sc/40),sc); el.textContent=c2;
+    if(c2>=sc) clearInterval(iv);
+  },30);
 
-  var lbl,sub;
-  if(sc<25){      lbl='🔴 Urgence digitale';          sub='Ton business est quasi-invisible. Le potentiel à activer est immense.'; }
-  else if(sc<50){ lbl='🟠 Démarrage en cours';        sub='Tu as les bases. Des gains rapides sont accessibles maintenant.'; }
-  else if(sc<75){ lbl='🟡 Bonne progression';         sub='Sur la bonne voie ! Quelques optimisations vont tout changer.'; }
-  else{           lbl='🟢 Maturité digitale avancée'; sub='Excellent niveau. Voyons comment passer au niveau supérieur.'; }
-  document.getElementById('sl').textContent = lbl;
-  document.getElementById('ss').textContent = sub;
+  var lbl, sub;
+  if      (sc<25){lbl='🔴 Urgence digitale';          sub='Ton business est quasi-invisible en ligne. Le potentiel à activer est immense.';}
+  else if (sc<50){lbl='🟠 Démarrage en cours';        sub='Tu as les bases. Des gains rapides sont accessibles dès maintenant.';}
+  else if (sc<75){lbl='🟡 Bonne progression';         sub='Tu es sur la bonne voie. Quelques optimisations ciblées vont tout changer.';}
+  else           {lbl='🟢 Maturité digitale avancée'; sub='Excellent niveau. Voyons ensemble comment passer au niveau supérieur.';}
+  document.getElementById('slabel').textContent=lbl;
+  document.getElementById('ssub').textContent=sub;
 
-  var str=[],act=[];
-  ans.forEach(function(v,i){ if(v===null)return; if(v>=8)str.push(LBL[i]); else act.push(ACT[i]); });
-  document.getElementById('str').innerHTML = (str.length ? str.map(function(s){return'<li>'+s+'</li>';}).join('') : '<li>Pose les bases d\'abord</li>');
-  document.getElementById('act').innerHTML = act.slice(0,4).map(function(a){return'<li>'+a+'</li>';}).join('') || '<li>Maintiens le cap !</li>';
-
+  var str=[], act=[];
+  ans.forEach(function(v,i){ if(v===null) return; if(v>=8) str.push(LABELS[i]); else act.push(ACTIONS[i]); });
+  document.getElementById('str').innerHTML=(str.length?str.map(function(s){return'<li>'+s+'</li>';}):'<li>Commence par les bases</li>').join('');
+  document.getElementById('act').innerHTML=act.slice(0,4).map(function(a){return'<li>'+a+'</li>';}).join('')||'<li>Maintiens le cap !</li>';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── Formulaire ──
-function chk(){
-  var em = document.getElementById('ip-email').value;
-  var ok = document.getElementById('ck-rgpd').checked && em.indexOf('@')>0 && em.indexOf('.')>0;
-  document.getElementById('bs').disabled = !ok;
+// ════ FORMULAIRE → MAKE WEBHOOK (JSON) ════
+function checkReady(){
+  var ok = document.getElementById('cgdpr').checked
+        && document.getElementById('f-email').value.includes('@');
+  document.getElementById('btn-send').disabled = !ok;
 }
 
-// Activer le bouton dès que l'email change
-document.getElementById('ip-email').addEventListener('keyup', chk);
-document.getElementById('ip-email').addEventListener('change', chk);
-document.getElementById('ck-rgpd').addEventListener('change', chk);
+async function sendLead(){
+  var prenom   = document.getElementById('f-prenom').value.trim();
+  var activite = document.getElementById('f-activite').value.trim();
+  var email    = document.getElementById('f-email').value.trim();
+  if(!email || !document.getElementById('cgdpr').checked) return;
 
-async function send(){
-  var prenom   = document.getElementById('ip-prenom').value.trim()   || 'Non renseigné';
-  var activite = document.getElementById('ip-activite').value.trim() || 'Non renseigné';
-  var email    = document.getElementById('ip-email').value.trim();
-  if(!email || !document.getElementById('ck-rgpd').checked) return;
+  leadPrenom   = prenom;
+  leadActivite = activite;
 
-  lpn = prenom; lac = activite;
+  document.getElementById('btn-send').disabled = true;
+  document.getElementById('btn-send').textContent = 'Envoi en cours…';
 
-  document.getElementById('bs').disabled = true;
-  document.getElementById('bs').textContent = 'Envoi…';
-
-  track('lead_sent',{score:sc});
-
-  var payload = JSON.stringify({
-    prenom:   prenom,
-    email:    email,
-    activite: activite,
-    score:    String(sc),
-    reponses: ans.join(','),
-    source:   'quiz-e-reputation',
-    ts:       String(Date.now()),
-    rgpd:     'Oui-'+new Date().toISOString()
-  });
+  track('lead_sent', { score: sc, source: 'quiz-e-reputation' });
 
   try {
-    await fetch(WEBHOOK, {
-      method:  'POST',
-      mode:    'no-cors',
-      headers: {'Content-Type':'application/json'},
-      body:    payload
+    // ── Envoi JSON vers Make Webhook ──
+    await fetch(MAKE_WEBHOOK, {
+      method: 'POST',
+      mode: 'no-cors',          // Make webhook accepte no-cors
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prenom:   prenom   || 'Non renseigné',
+        email:    email,
+        activite: activite || 'Non renseigné',
+        score:    sc,
+        reponses: ans.join(','),
+        source:   'quiz-e-reputation',
+        timestamp: Date.now(),
+        consentement_rgpd: 'Oui — ' + new Date().toISOString()
+      })
     });
-  } catch(e){ /* no-cors ne renvoie rien, normal */ }
+  } catch(e) {
+    // no-cors ne renvoie pas d'erreur, on affiche toujours le succès
+    console.log('Webhook sent');
+  }
 
-  document.getElementById('msg-ok').style.display = 'block';
-  document.getElementById('bs').style.display     = 'none';
+  // Afficher succès dans tous les cas
+  document.getElementById('send-ok').style.display = 'block';
+  document.getElementById('btn-send').style.display = 'none';
 }
 
-// ── PDF jsPDF ──
-function dlPDF(){
-  if(typeof window.jspdf==='undefined'){ alert('PDF non disponible, réessaie dans quelques secondes.'); return; }
-  var doc = new window.jspdf.jsPDF({unit:'mm',format:'a4'});
-  var W=210,H=297;
-  var prenom=lpn||'Votre résultat', act=lac||'';
-  var today=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+// ════ PDF jsPDF ════
+function downloadPDF(){
+  var doc = new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+  var W=210, H=297;
+  var prenom   = leadPrenom   || 'Votre résultat';
+  var activite = leadActivite || '';
+  var today    = new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
 
   function sf(r,g,b){doc.setFillColor(r,g,b);}
   function st(r,g,b){doc.setTextColor(r,g,b);}
   function ss(r,g,b){doc.setDrawColor(r,g,b);}
-  var NA=[13,27,75],N2=[26,45,107],GO=[201,164,53],IV=[247,243,232];
-  var GR=[61,186,122],RE=[224,82,82],AM=[224,160,48];
+  var NAVY=[13,27,75],NAVY2=[26,45,107],GOLD=[201,164,53],IVORY=[247,243,232];
+  var GREEN=[61,186,122],RED=[224,82,82],AMBER=[224,160,48];
 
-  // P1 — Cover
-  sf(...NA);doc.rect(0,0,W,H,'F');
-  sf(...GO);doc.rect(0,0,2,H,'F');
-  ss(...GO);doc.setLineWidth(0.3);
-  doc.circle(W-20,20,42,'S');doc.circle(W-20,20,30,'S');doc.circle(15,H-15,28,'S');
-  doc.setFont('helvetica','normal');doc.setFontSize(8);st(...GO);
-  doc.text('IVORY CONSULTING  ·  GUADELOUPE',W/2,26,{align:'center'});
-  sf(...GO);doc.rect(W/2-18,29,36,.5,'F');
-  doc.setFont('helvetica','bold');doc.setFontSize(22);st(...IV);
-  doc.text("TON PLAN D'ACTION DIGITAL",W/2,48,{align:'center'});
-  doc.setFontSize(13);st(...GO);
-  doc.text('Personnalise · Pret a appliquer',W/2,58,{align:'center'});
-  sf(...GO);doc.rect(W/2-14,62,28,.5,'F');
-  doc.setFont('helvetica','normal');doc.setFontSize(9);st(...IV);
-  doc.text('Prepare pour : '+prenom+'  ·  '+today,W/2,70,{align:'center'});
-
+  // PAGE 1 — COVER
+  sf(...NAVY); doc.rect(0,0,W,H,'F');
+  sf(...GOLD); doc.rect(0,0,2,H,'F');
+  ss(...GOLD); doc.setLineWidth(0.3);
+  doc.circle(W-20,20,45,'S'); doc.circle(W-20,20,32,'S'); doc.circle(15,H-15,30,'S');
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...GOLD);
+  doc.text('IVORY CONSULTING  ·  GUADELOUPE', W/2, 26, {align:'center'});
+  sf(...GOLD); doc.rect(W/2-18,29,36,0.5,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(24); st(...IVORY);
+  doc.text("TON PLAN D'ACTION DIGITAL", W/2, 50, {align:'center'});
+  doc.setFontSize(15); st(...GOLD);
+  doc.text('Personnalise · Pret a appliquer', W/2, 60, {align:'center'});
+  sf(...GOLD); doc.rect(W/2-14,64,28,0.5,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); st(...IVORY);
+  doc.text('Prepare pour : '+prenom+'  ·  '+today, W/2, 73, {align:'center'});
   var cy=H/2+5;
-  sf(...N2);doc.circle(W/2,cy,30,'F');
-  ss(...GO);doc.setLineWidth(1.5);doc.circle(W/2,cy,30,'S');
-  doc.setLineWidth(.4);doc.circle(W/2,cy,35,'S');
-  doc.setFont('helvetica','bold');doc.setFontSize(36);st(...GO);
-  doc.text(String(sc),W/2,cy+6,{align:'center'});
-  doc.setFont('helvetica','normal');doc.setFontSize(9);st(...IV);
-  doc.text('/ 100',W/2,cy+16,{align:'center'});
-  var sl2=sc<25?'URGENCE':sc<50?'DEMARRAGE':sc<75?'PROGRESSION':'MATURITE AVANCEE';
-  var sc2=sc<25?RE:sc<50?AM:sc<75?GO:GR;
-  doc.setFont('helvetica','bold');doc.setFontSize(11);st(...sc2);
-  doc.text(sl2,W/2,cy+30,{align:'center'});
-  if(act){ sf(...N2);doc.roundedRect(W/2-40,cy+38,80,11,3,3,'F');ss(...GO);doc.setLineWidth(.5);doc.roundedRect(W/2-40,cy+38,80,11,3,3,'S');doc.setFontSize(8);st(...GO);doc.text('Secteur : '+act,W/2,cy+45,{align:'center'}); }
-  doc.setFont('helvetica','normal');doc.setFontSize(7);st(...IV);
-  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  1/3',W/2,H-8,{align:'center'});
-  doc.link(10,H-14,W-20,10,{url:CALENDLY});
-
-  // P2 — Analyse
-  doc.addPage();
-  sf(...IV);doc.rect(0,0,W,H,'F');
-  sf(...GO);doc.rect(0,0,2,H,'F');
-  sf(...NA);doc.rect(0,0,W,18,'F');
-  doc.setFont('helvetica','bold');doc.setFontSize(11);st(...IV);doc.text('ANALYSE PAR CRITERE',14,12);
-  doc.setFont('helvetica','normal');doc.setFontSize(8);st(...GO);doc.text('Evaluateur Digital · Ivory Consulting',W-8,12,{align:'right'});
-  doc.setFontSize(9);st(...NA);doc.text('Detail de ton evaluation sur les 8 criteres cles.',14,27);
-  sf(...GO);doc.rect(14,30,50,.4,'F');
-  var y2=38,rh=26;
-  for(var i=0;i<8;i++){
-    var v=ans[i]||0,mx=MXV[i],p2=v/mx;
-    sf(...(i%2===0?[237,232,213]:[247,243,232]));doc.roundedRect(10,y2,W-20,rh-2,2,2,'F');
-    sf(...GO);doc.circle(21,y2+rh/2-1,5,'F');
-    doc.setFont('helvetica','bold');doc.setFontSize(7);st(...NA);doc.text(String(i+1),21,y2+rh/2+1.5,{align:'center'});
-    doc.setFont('helvetica','bold');doc.setFontSize(9);st(...NA);doc.text(LBLL[i],30,y2+10);
-    var bx=30,bw=W-110,by2=y2+15;
-    sf(200,195,180);doc.roundedRect(bx,by2,bw,4,2,2,'F');
-    var fc=p2>=.67?GR:p2>=.34?AM:RE;
-    sf(...fc);doc.roundedRect(bx,by2,Math.max(bw*p2,4),4,2,2,'F');
-    doc.setFont('helvetica','bold');doc.setFontSize(8);st(...NA);doc.text(v+'/'+mx,W-20,y2+10,{align:'right'});
-    var nv=p2>=.67?'Excellent':p2>=.34?'En cours':'A ameliorer';
-    st(...fc);doc.setFont('helvetica','normal');doc.setFontSize(7);doc.text(nv,W-20,y2+20,{align:'right'});
-    y2+=rh;
+  sf(...NAVY2); doc.circle(W/2,cy,32,'F');
+  ss(...GOLD); doc.setLineWidth(1.5); doc.circle(W/2,cy,32,'S');
+  doc.setLineWidth(0.4); doc.circle(W/2,cy,37,'S');
+  doc.setFont('helvetica','bold'); doc.setFontSize(40); st(...GOLD);
+  doc.text(String(sc), W/2, cy+8, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); st(...IVORY);
+  doc.text('/ 100', W/2, cy+18, {align:'center'});
+  var slabels=sc<25?'URGENCE DIGITALE':sc<50?'DEMARRAGE EN COURS':sc<75?'BONNE PROGRESSION':'MATURITE AVANCEE';
+  var scols=sc<25?RED:sc<50?AMBER:sc<75?GOLD:GREEN;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...scols);
+  doc.text(slabels, W/2, cy+34, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); st(...IVORY);
+  var subs=sc<25?'Quasi-invisible en ligne. Potentiel immense a activer.':sc<50?'Les bases sont la. Des gains rapides sont possibles.':sc<75?'Sur la bonne voie. Quelques optimisations cles.':'Excellent niveau. Voyons comment progresser encore.';
+  doc.text(subs, W/2, cy+43, {align:'center', maxWidth:120});
+  if(activite){
+    sf(...NAVY2); doc.roundedRect(W/2-42,cy+50,84,12,3,3,'F');
+    ss(...GOLD); doc.setLineWidth(0.5); doc.roundedRect(W/2-42,cy+50,84,12,3,3,'S');
+    doc.setFontSize(9); st(...GOLD);
+    doc.text('Secteur : '+activite, W/2, cy+58, {align:'center'});
   }
-  sf(...NA);doc.rect(0,H-14,W,14,'F');
-  doc.setFont('helvetica','normal');doc.setFontSize(7);st(...IV);
-  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  2/3',W/2,H-5,{align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); st(...IVORY);
+  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  1/3', W/2, H-8, {align:'center'});
   doc.link(10,H-14,W-20,10,{url:CALENDLY});
 
-  // P3 — Plan d'action
+  // PAGE 2 — ANALYSE
   doc.addPage();
-  sf(...NA);doc.rect(0,0,W,H,'F');
-  sf(...GO);doc.rect(0,0,2,H,'F');
-  ss(...GO);doc.setLineWidth(.3);doc.circle(W-15,15,28,'S');doc.circle(15,H-15,22,'S');
-  sf(...N2);doc.rect(0,0,W,18,'F');
-  doc.setFont('helvetica','bold');doc.setFontSize(11);st(...IV);doc.text("PLAN D'ACTION PRIORITAIRE",14,12);
-  doc.setFont('helvetica','normal');doc.setFontSize(8);st(...GO);doc.text('Personnalise · Ivory Consulting',W-8,12,{align:'right'});
-  sf(...GO);doc.rect(W/2-14,20,28,.5,'F');
-  doc.setFontSize(8);st(...IV);
-  doc.text('Bases sur ton score de '+sc+'/100, voici tes actions prioritaires.',W/2,28,{align:'center'});
-
-  var prio=[];
-  for(var j=0;j<8;j++){ if((ans[j]||0)<8)prio.push(j); }
-  if(!prio.length)prio=[0,1,2,3,4,5];
-
-  var y3=36,ah=26;
-  prio.slice(0,6).forEach(function(idx,rk){
-    sf(...N2);doc.roundedRect(10,y3,W-20,ah,3,3,'F');
-    ss(...GO);doc.setLineWidth(.5);doc.roundedRect(10,y3,W-20,ah,3,3,'S');
-    sf(...GO);doc.roundedRect(14,y3+6,8,8,2,2,'F');
-    doc.setFont('helvetica','bold');doc.setFontSize(7);st(...NA);doc.text(String(rk+1),18,y3+12,{align:'center'});
-    doc.setFont('helvetica','bold');doc.setFontSize(8);st(...GO);doc.text(LBLL[idx],26,y3+10);
-    doc.setFont('helvetica','normal');doc.setFontSize(8);st(...IV);
-    var lines=doc.splitTextToSize(ACT[idx],W-44);
-    doc.text(lines[0]||'',26,y3+19);
-    if(lines[1])doc.text(lines[1].substring(0,70),26,y3+24);
-    y3+=ah+4;
-  });
-
-  // CTA
-  var cy2=y3+4,ch=28;
-  sf(...GO);doc.roundedRect(10,cy2,W-20,ch,5,5,'F');
-  doc.setFont('helvetica','bold');doc.setFontSize(11);st(...NA);
-  doc.text('Reserve ton audit complet offert — 25 min',W/2,cy2+10,{align:'center'});
-  doc.setFont('helvetica','normal');doc.setFontSize(8);
-  doc.text('On analyse ton score et on construit ton plan sur mesure.',W/2,cy2+18,{align:'center'});
-  doc.setFont('helvetica','bold');doc.setFontSize(8);
-  doc.text('calendly.com/guehinadje-ivoryconsulting/audit',W/2,cy2+25,{align:'center'});
-  doc.link(10,cy2,W-20,ch,{url:CALENDLY});
-
-  doc.setFont('helvetica','normal');doc.setFontSize(7);st(...IV);
-  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  3/3',W/2,H-8,{align:'center'});
+  sf(...IVORY); doc.rect(0,0,W,H,'F');
+  sf(...GOLD); doc.rect(0,0,2,H,'F');
+  sf(...NAVY); doc.rect(0,0,W,18,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...IVORY);
+  doc.text('ANALYSE PAR CRITERE', 14, 12);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...GOLD);
+  doc.text('Evaluateur Digital · Ivory Consulting', W-8, 12, {align:'right'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); st(...NAVY);
+  doc.text('Detail de ton evaluation sur les 8 criteres cles de ta maturite digitale.', 14, 28);
+  sf(...GOLD); doc.rect(14,31,60,0.4,'F');
+  var y2=40, rowH=26;
+  for(var i=0;i<8;i++){
+    var val=ans[i]||0, mx=MAX_VALS[i], pct2=val/mx;
+    var bgCol=i%2===0?[237,232,213]:[247,243,232];
+    sf(...bgCol); doc.roundedRect(10,y2,W-20,rowH-2,2,2,'F');
+    sf(...GOLD); doc.circle(21,y2+rowH/2-1,5,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); st(...NAVY);
+    doc.text(String(i+1),21,y2+rowH/2+1.5,{align:'center'});
+    doc.setFont('helvetica','bold'); doc.setFontSize(9); st(...NAVY);
+    doc.text(LABELS_LONG[i],30,y2+10);
+    var bx=30,bw=W-110,by=y2+15;
+    sf(200,195,180); doc.roundedRect(bx,by,bw,4,2,2,'F');
+    var fillCol=pct2>=0.67?GREEN:pct2>=0.34?AMBER:RED;
+    sf(...fillCol); doc.roundedRect(bx,by,Math.max(bw*pct2,4),4,2,2,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); st(...NAVY);
+    doc.text(val+'/'+mx, W-20, y2+10, {align:'right'});
+    var niv=pct2>=0.67?'Excellent':pct2>=0.34?'En cours':'A ameliorer';
+    st(...fillCol); doc.setFont('helvetica','normal'); doc.setFontSize(7);
+    doc.text(niv, W-20, y2+20, {align:'right'});
+    y2+=rowH;
+  }
+  sf(...NAVY); doc.rect(0,H-14,W,14,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); st(...IVORY);
+  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  2/3', W/2, H-5, {align:'center'});
   doc.link(10,H-14,W-20,10,{url:CALENDLY});
 
-  doc.save('Plan_Action_Ivory_'+prenom.replace(/[^a-zA-Z0-9]/g,'_')+'.pdf');
-  track('pdf_dl',{score:sc});
+  // PAGE 3 — PLAN D'ACTION
+  doc.addPage();
+  sf(...NAVY); doc.rect(0,0,W,H,'F');
+  sf(...GOLD); doc.rect(0,0,2,H,'F');
+  ss(...GOLD); doc.setLineWidth(0.3);
+  doc.circle(W-15,15,30,'S'); doc.circle(15,H-15,25,'S');
+  sf(...NAVY2); doc.rect(0,0,W,18,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...IVORY);
+  doc.text("TON PLAN D'ACTION PRIORITAIRE", 14, 12);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...GOLD);
+  doc.text('Personalise · Ivory Consulting', W-8, 12, {align:'right'});
+  sf(...GOLD); doc.rect(W/2-16,20,32,0.5,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...IVORY);
+  doc.text('Bases sur ton score de '+sc+'/100, voici les actions a lancer en priorite.', W/2, 28, {align:'center'});
+  var priorities=[];
+  for(var j=0;j<8;j++){ if((ans[j]||0)<8) priorities.push(j); }
+  if(priorities.length===0){ priorities=[0,1,2,3,4,5]; }
+  var y3=38, actH=26;
+  priorities.slice(0,6).forEach(function(idx,rank){
+    sf(...NAVY2); doc.roundedRect(10,y3,W-20,actH,3,3,'F');
+    ss(...GOLD); doc.setLineWidth(0.5); doc.roundedRect(10,y3,W-20,actH,3,3,'S');
+    sf(...GOLD); doc.roundedRect(14,y3+6,8,8,2,2,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7); st(...NAVY);
+    doc.text(String(rank+1),18,y3+12,{align:'center'});
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); st(...GOLD);
+    doc.text(LABELS_LONG[idx],26,y3+10);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); st(...IVORY);
+    var lines=doc.splitTextToSize(ACTIONS[idx],W-44);
+    doc.text(lines[0],26,y3+19);
+    if(lines[1]) doc.text(lines[1].substring(0,70),26,y3+24);
+    y3+=actH+4;
+  });
+  var ctaY=y3+4, ctaH=28;
+  sf(...GOLD); doc.roundedRect(10,ctaY,W-20,ctaH,5,5,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); st(...NAVY);
+  doc.text('Reserve ton audit complet offert - 25 min', W/2, ctaY+11, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.text('On analyse ton score et on construit ton plan sur mesure.', W/2, ctaY+19, {align:'center'});
+  doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('calendly.com/guehinadje-ivoryconsulting/audit', W/2, ctaY+26, {align:'center'});
+  doc.link(10,ctaY,W-20,ctaH,{url:CALENDLY});
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); st(...IVORY);
+  doc.text('Ivory Consulting · Nadjé Guehi · Guadeloupe · calendly.com/guehinadje-ivoryconsulting/audit  |  3/3', W/2, H-8, {align:'center'});
+  doc.link(10,H-14,W-20,10,{url:CALENDLY});
+
+  doc.save('Plan_Action_Digital_Ivory_'+prenom.replace(/[^a-zA-Z0-9]/g,'_')+'.pdf');
+  track('pdf_downloaded',{score:sc});
 }
 </script>
 </body>
